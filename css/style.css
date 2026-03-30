@@ -333,6 +333,30 @@ img {
     left: var(--space-md);
 }
 
+/* --- ASCII Art Pieces --- */
+.work-item__ascii,
+.rejected-item__ascii {
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 0.6rem;
+    line-height: 1.15;
+    white-space: pre;
+    overflow-x: auto;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    border: 2px solid var(--color-accent-blue);
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .work-item__ascii,
+    .rejected-item__ascii {
+        font-size: 0.7rem;
+    }
+}
+
 /* --- Journal Section --- */
 .journal-list {
     display: flex;
