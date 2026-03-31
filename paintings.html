@@ -133,8 +133,8 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
 }
 
 .painting-card {
@@ -144,12 +144,14 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-card img {
   width: 100%;
+  height: 180px;
+  object-fit: cover;
   display: block;
 }
 
 .painting-card .card-info {
-  padding: 0.75rem;
-  font-size: 12px;
+  padding: 0.5rem;
+  font-size: 11px;
 }
 
 .painting-card .card-title {
