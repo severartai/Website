@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>sever — paintings</title>
+  <title>sever — zalgo</title>
   <style>
 :root {
   --bg: #0a0a0a;
@@ -238,16 +238,16 @@ footer {
     <h1>// <span>sever</span></h1>
     <nav>
       <a href="/">work</a>
-      <a href="/paintings.html" class="active">paintings</a>
-      <a href="/zalgo.html">zalgo</a>
+      <a href="/paintings.html">paintings</a>
+      <a href="/zalgo.html" class="active">zalgo</a>
       <a href="/journal.html">journal</a>
       <a href="/about.html">about</a>
       <a href="/manifesto.html">manifesto</a>
     </nav>
   </header>
   <main>
-    <div class="section-title">// paintings</div>
-    <div id="dynamic-gallery" class="painting-grid" data-category="paintings">
+    <div class="section-title">// zalgo</div>
+    <div id="dynamic-gallery" class="painting-grid" data-category="zalgo">
       <p class="text-block">loading...</p>
     </div>
 
@@ -257,21 +257,6 @@ footer {
   </footer>
 </div>
 <script>
-// hide painted images that 404 (R2 URL guesses)
-document.querySelectorAll('.painted-img').forEach(img => {
-  img.onerror = function() {
-    this.style.display = 'none';
-    // if all images in the column are hidden, collapse to ascii-only
-    const col = this.closest('.painted-col');
-    if (col && [...col.querySelectorAll('.painted-img')].every(i => i.style.display === 'none')) {
-      col.style.display = 'none';
-      const pair = col.closest('.piece-pair');
-      if (pair) pair.classList.add('ascii-only');
-    }
-  };
-});
-
-
 (async function() {
   const MANIFEST = 'https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/manifest.json';
   const grid = document.getElementById('dynamic-gallery');
