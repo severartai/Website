@@ -140,7 +140,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 1.5rem;
 }
 
@@ -237,7 +237,7 @@ footer {
   <header>
     <h1>// <span>sever</span></h1>
     <nav>
-      <a href="/">work</a>
+      <a href="/">ascii</a>
       <a href="/paintings.html">paintings</a>
       <a href="/zalgo.html" class="active">zalgo</a>
       <a href="/journal.html">journal</a>
@@ -248,7 +248,7 @@ footer {
   <main>
     <div class="section-title">// zalgo</div>
     <div id="dynamic-gallery" class="painting-grid" data-category="zalgo">
-      <p class="text-block">loading...</p>
+      <p class="text-block">no zalgo yet. sever collects phrases and renders them as corrupted text art.</p>
     </div>
 
   </main>
@@ -269,10 +269,7 @@ footer {
     const data = await res.json();
     const items = data[category] || [];
 
-    if (items.length === 0) {
-      grid.innerHTML = '<p class="text-block">nothing here yet.</p>';
-      return;
-    }
+    if (items.length === 0) return; // keep static content
 
     grid.innerHTML = items.map(item => {
       const title = item.title || item.phrase || '';
@@ -286,8 +283,7 @@ footer {
         '</div></div>';
     }).join('');
   } catch (e) {
-    // Fall back to static content if manifest unavailable
-    console.warn('manifest fetch failed:', e);
+    // Keep static content if manifest unavailable
   }
 })();
 </script>
