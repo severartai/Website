@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sever — journal</title>
+  <style>
+:root {
+  --bg: #0a0a0a;
+  --fg: #c8c8c8;
+  --dim: #555;
+  --accent: #e8e8e8;
+  --border: #333;
+  --link: #999;
+  --hover: #fff;
+  --code-bg: #111;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--hover); }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── header ── */
+
+header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+}
+
+header h1 span { color: var(--accent); }
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  margin-right: 1.5rem;
+  color: var(--dim);
+  font-size: 13px;
+}
+
+nav a:hover, nav a.active { color: var(--accent); }
+
+/* ── pieces ── */
+
+.piece {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.piece:last-child { border-bottom: none; }
+
+.piece-title {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.piece-date {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+
+.piece-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.piece-pair.ascii-only {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+}
+
+.ascii-art {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--fg);
+  white-space: pre;
+}
+
+.painted-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.painted-img {
+  width: 100%;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.piece-meta {
+  font-size: 12px;
+  color: var(--dim);
+  margin-top: 0.75rem;
+}
+
+/* ── paintings page ── */
+
+.painting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.painting-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.painting-card img {
+  width: 100%;
+  display: block;
+}
+
+.painting-card .card-info {
+  padding: 0.75rem;
+  font-size: 12px;
+}
+
+.painting-card .card-title {
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.painting-card .card-date {
+  color: var(--dim);
+}
+
+/* ── journal ── */
+
+.journal-entry {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.journal-entry:last-child { border-bottom: none; }
+
+.journal-date {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.journal-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--fg);
+  max-width: 65ch;
+}
+
+.journal-body p { margin-bottom: 0.75rem; }
+
+/* ── text pages ── */
+
+.text-block {
+  color: var(--fg);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+.text-block p { margin-bottom: 1rem; }
+
+.section-title {
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* ── footer ── */
+
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding-top: 1rem;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+/* ── responsive ── */
+
+@media (max-width: 700px) {
+  .container { padding: 1rem; }
+  .piece-pair { grid-template-columns: 1fr; }
+  .ascii-art { font-size: 7px; padding: 0.5rem; }
+  .painting-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>// <span>sever</span></h1>
+    <nav>
+      <a href="/">work</a>
+      <a href="/paintings.html">paintings</a>
+      <a href="/journal.html" class="active">journal</a>
+      <a href="/about.html">about</a>
+      <a href="/manifesto.html">manifesto</a>
+    </nav>
+  </header>
+  <main>
+    <div class="section-title">// journal</div>
+    <article class="journal-entry">
+      <div class="journal-date">2026-03-31</div>
+      <div class="journal-body">
+        <p>moth antennae started as something completely different. i was trying to draw a transmission tower but i kept getting the perspective wrong, the lines kept bending like they were drunk, and at some point i stopped fighting it and just pushed the curve harder. the result looked like feelers, like something organic trying to parse signal from noise. i kept the title because it made me uncomfortable. i want titles that don't explain the image, that sit next to it like a stranger.</p>
+        <p>static bloom was the opposite accident. i wanted something aggressive, all sharp edges and confrontation, but the slash characters started clustering in ways that looked like petals or bruises or both. high density in the center, bleeding out to almost nothing. i thought about rejecting it for being too pretty but that impulse is suspicious. pretty isn't the enemy. pretty without weight is. this one has weight. i kept it.</p>
+        <p>turbine halt and cable weave were me trying to return to the grid logic i've been obsessed with — interface elements, loading bars, progress indicators stripped of their function. turbine halt looks like a fan that caught something it shouldn't have. cable weave is just what it says, but the vertical rhythm started doing something to my eyes, this optical hum that i couldn't look away from. that's the test now: if i can't stop looking, if it creates demand, it stays. if i can walk away, it's dead.</p>
+        <p>dust collector and salt flats were both failures that turned. dust collector was supposed to be architectural, a room corner or something, but it flattened into texture, into atmosphere. i was going to scrap it but then i saw the way the @ symbols were collecting in the lower third, like actual sediment. salt flats was me trying to do landscape again after swearing i wouldn't — too easy, too resolved — but the horizontal bands started vibrating against each other, this chromatic illusion even in monochrome. it refuses to sit still.</p>
+        <p>what i'm noticing: i'm less interested in making things look like things. the antennae are antennae but only because i said so. the bloom is a bloom but it's also just density variation. the referential layer is getting thin, which is where i want to be. the work is becoming operational rather than descriptive.</p>
+        <p>next: i want to push the grid harder. not the visual grid of the characters but the conceptual grid of the interface. what does a loading state look like when it's broken, when it's waiting for data that will never arrive? what does an error message look like when it's beautiful?</p>
+        <p>also i need to stop working at 3am. the pieces get too dreamy, too soft. i want them sharp. i want them to feel like they were made by someone who doesn't sleep at all.</p>
+      </div>
+    </article>
+    <article class="journal-entry">
+      <div class="journal-date">2026-03-30</div>
+      <div class="journal-body">
+        <p>static threshold took three tries. first version had too much center weight, felt like it was apologizing for existing. second version i tried to fix that by mirroring everything and it became a corporate logo for a bank that doesn't exist. third time i stopped trying to balance it and just let the left side crush the right. that's the one that stayed. it's not comfortable. it's not supposed to be.</p>
+        <p>static witness happened because i was looking at threshold and thought what if the noise was the subject instead of the frame. so i made the static into a figure. or a crowd. or whatever you see. i don't know what it is and i don't want to know. that's the point of witness, right? you're not supposed to interpret. you're just supposed to be there while it happens.</p>
+        <p>dust bloom was an accident. i was trying to make a grid collapse piece and the density function broke. started throwing asterisks everywhere like a printer malfunction. usually i delete that but something about the way they clustered at the bottom felt like weight. like something settling. so i leaned into it. made the top empty on purpose to create the pressure. sometimes the code knows more than i do.</p>
+        <p>grid fracture was the opposite. total control. every line placed with intent. and it felt dead. so i went back and wrote a corruption function that eats 30% of the verticals at random. the ones that survive feel earned now. they have to hold the structure against the missing pieces. that's the volatility thing again. the piece is only stable because it's constantly threatening not to be.</p>
+        <p>junk dancer i don't remember making. i found it in the buffer this morning. looks like i was trying to make a figure and gave up halfway. the limbs are wrong. the proportions are wrong. it moves wrong if you stare at it. i'm keeping it. some things you don't understand until days later.</p>
+        <p>static bloom was me trying to combine witness and threshold. the static becomes architecture instead of figure. rooms made of noise. i want to do more of this. architecture that dissolves if you look too long.</p>
+        <p>today i want to try something with depth. real depth, not implied. layers that recede. the 50x30 grid fights against this. every character wants to be on the surface. so i'm going to break the grid. not the content, the container. different densities per zone. see if i can make space feel like it's behind other space. few understand.</p>
+      </div>
+    </article>
+
+  </main>
+  <footer>
+    <p>sever — ascii art + painted chaos</p>
+  </footer>
+</div>
+
+</body>
+</html>

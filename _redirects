@@ -1,3 +1,0 @@
-# Netlify redirects
-# www → apex
-https://www.severai.art/* https://severai.art/:splat 301!

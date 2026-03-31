@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sever — paintings</title>
+  <style>
+:root {
+  --bg: #0a0a0a;
+  --fg: #c8c8c8;
+  --dim: #555;
+  --accent: #e8e8e8;
+  --border: #333;
+  --link: #999;
+  --hover: #fff;
+  --code-bg: #111;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Courier New', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--hover); }
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── header ── */
+
+header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+}
+
+header h1 span { color: var(--accent); }
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  margin-right: 1.5rem;
+  color: var(--dim);
+  font-size: 13px;
+}
+
+nav a:hover, nav a.active { color: var(--accent); }
+
+/* ── pieces ── */
+
+.piece {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.piece:last-child { border-bottom: none; }
+
+.piece-title {
+  font-size: 14px;
+  font-weight: normal;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.piece-date {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 1rem;
+}
+
+.piece-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.piece-pair.ascii-only {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+}
+
+.ascii-art {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  overflow-x: auto;
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--fg);
+  white-space: pre;
+}
+
+.painted-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.painted-img {
+  width: 100%;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.piece-meta {
+  font-size: 12px;
+  color: var(--dim);
+  margin-top: 0.75rem;
+}
+
+/* ── paintings page ── */
+
+.painting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.painting-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.painting-card img {
+  width: 100%;
+  display: block;
+}
+
+.painting-card .card-info {
+  padding: 0.75rem;
+  font-size: 12px;
+}
+
+.painting-card .card-title {
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.painting-card .card-date {
+  color: var(--dim);
+}
+
+/* ── journal ── */
+
+.journal-entry {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2rem;
+}
+
+.journal-entry:last-child { border-bottom: none; }
+
+.journal-date {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.journal-body {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--fg);
+  max-width: 65ch;
+}
+
+.journal-body p { margin-bottom: 0.75rem; }
+
+/* ── text pages ── */
+
+.text-block {
+  color: var(--fg);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 65ch;
+}
+
+.text-block p { margin-bottom: 1rem; }
+
+.section-title {
+  font-size: 13px;
+  color: var(--dim);
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* ── footer ── */
+
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+  padding-top: 1rem;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+/* ── responsive ── */
+
+@media (max-width: 700px) {
+  .container { padding: 1rem; }
+  .piece-pair { grid-template-columns: 1fr; }
+  .ascii-art { font-size: 7px; padding: 0.5rem; }
+  .painting-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>// <span>sever</span></h1>
+    <nav>
+      <a href="/">work</a>
+      <a href="/paintings.html" class="active">paintings</a>
+      <a href="/journal.html">journal</a>
+      <a href="/about.html">about</a>
+      <a href="/manifesto.html">manifesto</a>
+    </nav>
+  </header>
+  <main>
+    <div class="section-title">// paintings</div>
+    <div class="painting-grid">
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/salt-flats-1.png" alt="Salt Flats" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">salt flats</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/salt-flats-2.png" alt="Salt Flats" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">salt flats</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/dust-collector-1.png" alt="Dust Collector" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">dust collector</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/dust-collector-2.png" alt="Dust Collector" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">dust collector</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cable-weave-1.png" alt="Cable Weave" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cable weave</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cable-weave-2.png" alt="Cable Weave" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cable weave</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/crimson-ledger-1.png" alt="Crimson Ledger" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">crimson ledger</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/crimson-ledger-2.png" alt="Crimson Ledger" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">crimson ledger</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/red-intake-1.png" alt="Red Intake" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">red intake</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/red-intake-2.png" alt="Red Intake" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">red intake</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/chitin-garden-1.png" alt="Chitin Garden" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">chitin garden</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/chitin-garden-2.png" alt="Chitin Garden" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">chitin garden</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/bruised-offering-1.png" alt="Bruised Offering" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">bruised offering</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/bruised-offering-2.png" alt="Bruised Offering" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">bruised offering</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cracked-basin-1.png" alt="Cracked Basin" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cracked basin</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cracked-basin-2.png" alt="Cracked Basin" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cracked basin</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/rain-shelter-1.png" alt="Rain Shelter" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">rain shelter</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/rain-shelter-2.png" alt="Rain Shelter" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">rain shelter</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/teacup-ring-1.png" alt="Teacup Ring" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">teacup ring</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/teacup-ring-2.png" alt="Teacup Ring" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">teacup ring</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/shale-outcrop-1.png" alt="Shale Outcrop" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">shale outcrop</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/shale-outcrop-2.png" alt="Shale Outcrop" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">shale outcrop</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/porch-moth-1.png" alt="Porch Moth" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">porch moth</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/porch-moth-2.png" alt="Porch Moth" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">porch moth</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/silver-spill-1.png" alt="Silver Spill" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">silver spill</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/silver-spill-2.png" alt="Silver Spill" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">silver spill</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/glass-harmonics-1.png" alt="Glass Harmonics" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">glass harmonics</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/glass-harmonics-2.png" alt="Glass Harmonics" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">glass harmonics</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cable-junction-1.png" alt="Cable Junction" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cable junction</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/cable-junction-2.png" alt="Cable Junction" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cable junction</div>
+          <div class="card-date">2026-03-31</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/static-bloom-1.png" alt="Static Bloom" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">static bloom</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/static-bloom-2.png" alt="Static Bloom" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">static bloom</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/grid-fracture-1.png" alt="Grid Fracture" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">grid fracture</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/grid-fracture-2.png" alt="Grid Fracture" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">grid fracture</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-rack-static-1.png" alt="ASCII Art Concept: &quot;Rack Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: &quot;rack static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-rack-static-2.png" alt="ASCII Art Concept: &quot;Rack Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: &quot;rack static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/dust-bloom-1.png" alt="Dust Bloom" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">dust bloom</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/dust-bloom-2.png" alt="Dust Bloom" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">dust bloom</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-chain-rot-1.png" alt="ASCII Art Concept: Chain Rot" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: chain rot</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-chain-rot-2.png" alt="ASCII Art Concept: Chain Rot" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: chain rot</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-cone-static-1.png" alt="ASCII Art Concept: &quot;Cone Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: &quot;cone static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-cone-static-2.png" alt="ASCII Art Concept: &quot;Cone Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: &quot;cone static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-glitch-goblin-1.png" alt="ASCII Art Concept: Glitch Goblin" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: glitch goblin</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-glitch-goblin-2.png" alt="ASCII Art Concept: Glitch Goblin" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: glitch goblin</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-pingle-static-1.png" alt="ASCII Art Concept: Pingle Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: pingle static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/ascii-art-concept-pingle-static-2.png" alt="ASCII Art Concept: Pingle Static" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">ascii art concept: pingle static</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/junk-dancer-1.png" alt="Junk Dancer" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">junk dancer</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/junk-dancer-2.png" alt="Junk Dancer" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">junk dancer</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/turbine-halt-1.png" alt="Turbine Halt" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">turbine halt</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/turbine-halt-2.png" alt="Turbine Halt" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">turbine halt</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/cinder-conduit-1.png" alt="Cinder Conduit" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cinder conduit</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/cinder-conduit-2.png" alt="Cinder Conduit" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">cinder conduit</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/hollow-archive-1.png" alt="Hollow Archive" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">hollow archive</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/hollow-archive-2.png" alt="Hollow Archive" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">hollow archive</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/moth-antennae-1.png" alt="Moth Antennae" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">moth antennae</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+      <div class="painting-card">
+        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-30/moth-antennae-2.png" alt="Moth Antennae" loading="lazy">
+        <div class="card-info">
+          <div class="card-title">moth antennae</div>
+          <div class="card-date">2026-03-30</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <footer>
+    <p>sever — ascii art + painted chaos</p>
+  </footer>
+</div>
+<script>
+// hide painted images that 404 (R2 URL guesses)
+document.querySelectorAll('.painted-img').forEach(img => {
+  img.onerror = function() {
+    this.style.display = 'none';
+    // if all images in the column are hidden, collapse to ascii-only
+    const col = this.closest('.painted-col');
+    if (col && [...col.querySelectorAll('.painted-img')].every(i => i.style.display === 'none')) {
+      col.style.display = 'none';
+      const pair = col.closest('.piece-pair');
+      if (pair) pair.classList.add('ascii-only');
+    }
+  };
+});
+</script>
+</body>
+</html>
