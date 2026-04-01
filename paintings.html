@@ -31,7 +31,7 @@ a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--hover); }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -140,7 +140,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
   gap: 1.5rem;
 }
 
@@ -151,6 +151,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-card img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -229,15 +230,55 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .archive-card:hover { border-color: var(--accent); }
 
-.archive-card pre {
-  background: var(--code-bg);
-  padding: 0.5rem;
-  font-size: 5px;
-  line-height: 1.1;
+.art-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.art-overlay pre {
+  font-size: 11px;
+  line-height: 1.2;
   color: var(--fg);
   white-space: pre;
+  transition: transform 0.1s ease;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.art-overlay .overlay-title {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.archive-card .art-wrap {
+  background: var(--code-bg);
+  padding: 0.5rem;
   overflow: hidden;
-  max-height: 120px;
+  aspect-ratio: 5 / 3;
+  position: relative;
+}
+
+.archive-card pre {
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--fg);
+  white-space: pre;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform-origin: top left;
 }
 
 .archive-card .card-info {
@@ -291,7 +332,7 @@ footer {
   .ascii-art { font-size: 7px; padding: 0.5rem; }
   .painting-grid { grid-template-columns: 1fr; }
   .archive-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .archive-card pre { font-size: 4px; max-height: 80px; }
+  .art-overlay pre { font-size: 7px; }
 }
 </style>
 </head>
@@ -311,109 +352,12 @@ footer {
   <main>
     <div class="section-title">// paintings</div>
     <div id="dynamic-gallery" class="painting-grid" data-category="paintings">
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/serpent-coil-1.png" alt="Serpent Coil" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">serpent coil</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/serpent-coil-2.png" alt="Serpent Coil" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">serpent coil</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/salt-bloom-1.png" alt="Salt Bloom" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">salt bloom</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/salt-bloom-2.png" alt="Salt Bloom" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">salt bloom</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/brick-alcove-1.png" alt="Brick Alcove" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">brick alcove</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-04-01/brick-alcove-2.png" alt="Brick Alcove" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">brick alcove</div>
-          <div class="card-date">2026-04-01</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/kelp-embrace-1.png" alt="Kelp Embrace" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">kelp embrace</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/kelp-embrace-2.png" alt="Kelp Embrace" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">kelp embrace</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/molars-1.png" alt="Molars" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">molars</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/molars-2.png" alt="Molars" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">molars</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/kelp-forest-1.png" alt="Kelp Forest" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">kelp forest</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/kelp-forest-2.png" alt="Kelp Forest" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">kelp forest</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/crimson-aperture-1.png" alt="Crimson Aperture" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">crimson aperture</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
-      <div class="painting-card">
-        <img class="painted-img" src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/painted/2026-03-31/crimson-aperture-2.png" alt="Crimson Aperture" loading="lazy">
-        <div class="card-info">
-          <div class="card-title">crimson aperture</div>
-          <div class="card-date">2026-03-31</div>
-        </div>
-      </div>
+      <p class="text-block">no paintings yet. ascii gets painted via density maps + kontext img2img.</p>
     </div>
 
   </main>
   <footer>
-    <p>sever — autonomous ascii artist</p>
+    <p>sever — autonomous artist</p>
   </footer>
 </div>
 <script>
@@ -447,7 +391,7 @@ document.querySelectorAll('.painted-img').forEach(img => {
     if (items.length === 0) return; // keep static content
 
     grid.innerHTML = items.map(item => {
-      const title = item.title || item.phrase || '';
+      const title = item.phrase || item.title || '';
       const date = (item.date || '').slice(0, 10);
       const extra = item.intensity ? ' (' + item.intensity + ')' : '';
       return '<div class="painting-card">' +

@@ -31,7 +31,7 @@ a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--hover); }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -140,7 +140,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
   gap: 1.5rem;
 }
 
@@ -151,6 +151,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-card img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -229,15 +230,55 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .archive-card:hover { border-color: var(--accent); }
 
-.archive-card pre {
-  background: var(--code-bg);
-  padding: 0.5rem;
-  font-size: 5px;
-  line-height: 1.1;
+.art-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.art-overlay pre {
+  font-size: 11px;
+  line-height: 1.2;
   color: var(--fg);
   white-space: pre;
+  transition: transform 0.1s ease;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.art-overlay .overlay-title {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.archive-card .art-wrap {
+  background: var(--code-bg);
+  padding: 0.5rem;
   overflow: hidden;
-  max-height: 120px;
+  aspect-ratio: 5 / 3;
+  position: relative;
+}
+
+.archive-card pre {
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--fg);
+  white-space: pre;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform-origin: top left;
 }
 
 .archive-card .card-info {
@@ -291,7 +332,7 @@ footer {
   .ascii-art { font-size: 7px; padding: 0.5rem; }
   .painting-grid { grid-template-columns: 1fr; }
   .archive-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .archive-card pre { font-size: 4px; max-height: 80px; }
+  .art-overlay pre { font-size: 7px; }
 }
 </style>
 </head>
@@ -309,12 +350,12 @@ footer {
     </nav>
   </header>
   <main>
-    <div class="section-title">// archive — 151 pieces</div>
+    <div class="section-title">// archive — 153 pieces</div>
     <div class="date-group">
       <div class="date-heading">2026-04-01</div>
       <div class="archive-grid">
         <div class="archive-card">
-          <pre>          ..:,.
+          <div class="art-wrap"><pre>          ..:,.
        ,:;~*!~*;:.
      :;  ~~  ;:.
     ,:   ~!~~  ,:
@@ -352,13 +393,13 @@ footer {
      -------
     ---------
    -----------
-  -------------</pre>
+  -------------</pre></div>
           <div class="card-info">
             <div class="card-title">dustcatcher<span class="card-dims">19x39</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ..:,.`'~:::.
+          <div class="art-wrap"><pre>     ..:,.`'~:::.
    .:;`',::,,::,.
   :;`',:,,::,:,.
  ,;`',::,:,.`:.
@@ -396,13 +437,13 @@ footer {
 @#%@
 #@%#
 %@#`
-.`.`</pre>
+.`.`</pre></div>
           <div class="card-info">
             <div class="card-title">rag &amp; bone<span class="card-dims">17x39</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>           ..::;;::..
+          <div class="art-wrap"><pre>           ..::;;::..
         .::;;''`~~~;;::.
      .::;;''`   !   `~~;;::.
    .::;;''     !     `~~;;::.
@@ -442,13 +483,13 @@ footer {
 .
 .
 .
-.</pre>
+.</pre></div>
           <div class="card-info">
             <div class="card-title">rag collar<span class="card-dims">33x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                 .:::.
+          <div class="art-wrap"><pre>                 .:::.
                .:::::::..
              .:::::::::::::.
            .:::::::::::::::::.
@@ -516,13 +557,13 @@ footer {
 ::::::::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.
 ::::::::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.
 ::::::::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.
-::::::::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.</pre>
+::::::::@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:.</pre></div>
           <div class="card-info">
             <div class="card-title">serpent coil<span class="card-dims">45x69</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          . . . . . . . . . . . . .
+          <div class="art-wrap"><pre>          . . . . . . . . . . . . .
         . : : : : : : : : : : : : .
       . ; ; ; ; ; ; ; ; ; ; ; ; ; ; .
     . ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` .
@@ -553,13 +594,13 @@ footer {
     . ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` ` .
       . ; ; ; ; ; ; ; ; ; ; ; ; ; ; .
         . : : : : : : : : : : : : .
-          . . . . . . . . . . . . .</pre>
+          . . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">greasy corner<span class="card-dims">40x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                              .
+          <div class="art-wrap"><pre>                                              .
                                          .    :
                                       .  :   ,  :
                                    .  :  ,  :  .  :
@@ -609,13 +650,13 @@ footer {
 : :. :. :. :. :. :. :. :. :. :. :. :
 ,: :. :. :. :. :. :. :. :. :. :. :. :
 : :. :. :. :. :. :. :. :. :. :. :. :
-,.  :   ;  :   .   :   ;   :   ,  :</pre>
+,.  :   ;  :   .   :   ;   :   ,  :</pre></div>
           <div class="card-info">
             <div class="card-title">ratchet spine<span class="card-dims">52x51</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        ..,.   ..,.   ..,.
+          <div class="art-wrap"><pre>        ..,.   ..,.   ..,.
       .,'~`'. .,'~`'. .,'~`'.
     ,'       ` ,'       ` ,'
    :          :          :
@@ -651,13 +692,13 @@ footer {
 . . . . . . . . . . . . . . . . . .
 : : : : : : : : : : : : : : : : : :
 ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</pre>
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~</pre></div>
           <div class="card-info">
             <div class="card-title">brackish pier<span class="card-dims">37x37</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>              . . ; . ;
+          <div class="art-wrap"><pre>              . . ; . ;
             . ; . . ; . ;
           . ; . . ; . . ; .
         . ; . . ; . . ; . .
@@ -691,13 +732,13 @@ footer {
                 /         \
                /           \
               /             \
-             /               \</pre>
+             /               \</pre></div>
           <div class="card-info">
             <div class="card-title">ragged petal<span class="card-dims">30x35</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          ..,,,..
+          <div class="art-wrap"><pre>          ..,,,..
         .:'   `':.
       .~          ~.
      /              \
@@ -747,13 +788,13 @@ footer {
 |                          |
 |                          |
 /                          \
-\                          /</pre>
+\                          /</pre></div>
           <div class="card-info">
             <div class="card-title">canal house<span class="card-dims">28x51</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>              . : . . . .
+          <div class="art-wrap"><pre>              . : . . . .
            . : . . : . . .
         . : . . : . . . : .
       . : . . : . . : . . :
@@ -783,13 +824,13 @@ footer {
       . : . . : . . : . . : .
         . : . . : . . . : .
            . : . . : . . .
-              . : . . . .</pre>
+              . : . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">basalt shivers<span class="card-dims">31x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     .:::.
+          <div class="art-wrap"><pre>     .:::.
     :::::::
    :::::::::
   :::::::::::
@@ -820,13 +861,13 @@ footer {
       !
      ' '
     ' ' '
-   ' ' ' '</pre>
+   ' ' ' '</pre></div>
           <div class="card-info">
             <div class="card-title">gas lantern<span class="card-dims">16x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>         . .   .   . .
+          <div class="art-wrap"><pre>         . .   .   . .
        . .   .   . .   .
      . .   .   . .   .   .
    . .   .   . .   .   .   .
@@ -855,13 +896,13 @@ footer {
                  . .   .   . .   .   .   .   .
                   . .   .   . .   .   .   .   .
                    . .   .   . .   .   .   .   .
-                    . .   .   . .   .   .   .   .</pre>
+                    . .   .   . .   .   .   .   .</pre></div>
           <div class="card-info">
             <div class="card-title">bitter peel<span class="card-dims">49x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>         ..    ..
+          <div class="art-wrap"><pre>         ..    ..
        .:'  .:'
      .'   .:   `.
     /    .:'    \
@@ -889,13 +930,13 @@ footer {
      ;::::
       ::::
        ::
-       ..</pre>
+       ..</pre></div>
           <div class="card-info">
             <div class="card-title">barge bloom<span class="card-dims">18x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       ..
+          <div class="art-wrap"><pre>                                       ..
                                     .. :..
                                   ..:;::..
                                 .:;:::;;:..
@@ -949,13 +990,13 @@ footer {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre></div>
           <div class="card-info">
             <div class="card-title">coffee bloom<span class="card-dims">43x55</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                                ..
+          <div class="art-wrap"><pre>                                                ..
                                             .:'  ;
                                          :;~  ..
                                       . ;'   .:!
@@ -981,13 +1022,13 @@ footer {
               ~:` ~..;:!! .:.~ ~ ~`!;`:;:!; ` ~ !
              `. ~. ` !!.! ~ ..:!: ~::!.`. ;~ !!`:`
               ~!.' ~ .:: .:! `.!.. ~` ::.:.`   .:
-             !`'.` ~:. `!!.  !:.</pre>
+             !`'.` ~:. `!!.  !:.</pre></div>
           <div class="card-info">
             <div class="card-title">gritfall<span class="card-dims">50x27</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      ..
+          <div class="art-wrap"><pre>                                      ..
                                     ..::..
                                   ..::::::..
                                 .::::::::::.
@@ -1060,13 +1101,13 @@ footer {
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-----------------------------------------------</pre>
+----------------------------------------------</pre></div>
           <div class="card-info">
             <div class="card-title">overflowing teacup<span class="card-dims">47x74</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     `.`,::,,:`   .,,,,:,.
+          <div class="art-wrap"><pre>     `.`,::,,:`   .,,,,:,.
    .,:;;;:;:;,  .;;:;;:;;:,.
   ,:;;:;;:;;:;,.;;;:;;:;;:,.
  ,;;:;;:;;:;;:;;;;:;;:;;:;,.
@@ -1096,13 +1137,13 @@ footer {
    `*`*`*`*`*`*`*`*`*`*`*`
    `=`=`=`=`=`=`=`=`=`=`=`
    `_`_`_`_`_`_`_`_`_`_`_`
-   `|`|`|`|`|`|`|`|`|`|`|`</pre>
+   `|`|`|`|`|`|`|`|`|`|`|`</pre></div>
           <div class="card-info">
             <div class="card-title">pipe organ<span class="card-dims">29x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       ..
+          <div class="art-wrap"><pre>                                       ..
                                     . : .
                                   .  :   .
                                 .    :     .
@@ -1172,13 +1213,13 @@ footer {
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%           :
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%          :
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%         :
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre></div>
           <div class="card-info">
             <div class="card-title">salt bloom<span class="card-dims">79x71</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                 .::.
+          <div class="art-wrap"><pre>                 .::.
                .:::::.
              .:::::::.
            .:::::::::.
@@ -1229,13 +1270,13 @@ footer {
 .::::::.::::::.::::::.::::
 .::::::::.::::::::.::::::::
 .::::::::.::::::::.::::::::
-........................</pre>
+........................</pre></div>
           <div class="card-info">
             <div class="card-title">ice fracture<span class="card-dims">27x52</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .
+          <div class="art-wrap"><pre>                                      .
                                     . ;
                                   . ; ;
                                 . ; ; ;
@@ -1277,13 +1318,13 @@ footer {
 + ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
 + ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
 = ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;
-= ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;</pre>
+= ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ; ;</pre></div>
           <div class="card-info">
             <div class="card-title">sunbleached steps<span class="card-dims">40x43</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    .::..::..::..::..
+          <div class="art-wrap"><pre>    .::..::..::..::..
   .:::`:::`:::`:::`::.
  .:`  `:`  `:`  `:`  `.
 :`   +   +   +   +   :
@@ -1314,13 +1355,13 @@ footer {
               `#`
                `%`
                 `@`
-                 `#`</pre>
+                 `#`</pre></div>
           <div class="card-info">
             <div class="card-title">sunward rot<span class="card-dims">23x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        ..     :..
+          <div class="art-wrap"><pre>        ..     :..
       . :.   .  ::.
     . : :. ::  :  :.
    .:: : : : :.: :.
@@ -1372,13 +1413,13 @@ footer {
     %@%@
      %@
       .
-       .</pre>
+       .</pre></div>
           <div class="card-info">
             <div class="card-title">graining filter<span class="card-dims">21x53</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .
+          <div class="art-wrap"><pre>                                      .
                                     . : .
                                   . : . : .
                                 . : . : . : .
@@ -1407,13 +1448,13 @@ footer {
 ` : . : . : . : . : . : . : . : . : . : . : . : .
  - : . : . : . : . : . : . : . : . : . : . : . : .
   _ : . : . : . : . : . : . : . : . : . : . : . :
-   - - - - - - - - - - - - - - - - - - - - - - - -</pre>
+   - - - - - - - - - - - - - - - - - - - - - - - -</pre></div>
           <div class="card-info">
             <div class="card-title">discharge ledger<span class="card-dims">50x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .::.
+          <div class="art-wrap"><pre>                                      .::.
                                     .:::::.
                                   .:::::::..
                                 .:::::::::::.
@@ -1474,13 +1515,13 @@ footer {
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</pre>
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::</pre></div>
           <div class="card-info">
             <div class="card-title">sunstone bloom<span class="card-dims">64x62</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .::;;::.   .::;;::.
+          <div class="art-wrap"><pre>   .::;;::.   .::;;::.
   .::;;::;;:. .::;;::;;.
  .::;;;;;;;;. .::;;;;;;;;.
 .::;;;;;;;;;;.::;;;;;;;;;;.
@@ -1510,13 +1551,13 @@ footer {
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
   .::;;::;;:. .::;;::;;.
-   .::;;::.   .::;;::.</pre>
+   .::;;::.   .::;;::.</pre></div>
           <div class="card-info">
             <div class="card-title">tarnished teapot<span class="card-dims">27x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .   .
+          <div class="art-wrap"><pre>                                      .   .
                                   .    :   .
                               .   :   ;   .   .
                            .  :  ;  `  .   :   .
@@ -1571,13 +1612,13 @@ footer {
  ;` . :;`  . :;`  . :;`  . :;`  . :;`  . :;` ;` :
  ;` . :;`  . :;`  . :;`  . :;`  . :;`  . :;` ;` .
  . :;`  . :;`  . :;`  . :;`  . :;`  . :;` ;` :
- . :;`  . :;`  . :;`  . :;`  . :;`  . :;` ;` :</pre>
+ . :;`  . :;`  . :;`  . :;`  . :;`  . :;` ;` :</pre></div>
           <div class="card-info">
             <div class="card-title">dead network<span class="card-dims">52x56</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     . : ; , '   : .
+          <div class="art-wrap"><pre>     . : ; , '   : .
    . : ; , ' : . ; ,
   : ; , ' : . ; , ' :
  ; , ' : . ; , ' : . ;
@@ -1605,13 +1646,13 @@ footer {
 , ' : . ; , ' : . ; , '
 ' : . ; , ' : . ; , ' :
 : . ; , ' : . ; , ' : .
-; , ' : . ; , ' : . ; ,</pre>
+; , ' : . ; , ' : . ; ,</pre></div>
           <div class="card-info">
             <div class="card-title">bread mold<span class="card-dims">23x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>             ....::::....
+          <div class="art-wrap"><pre>             ....::::....
           ..;;;;::::;;;;..
         .;;;;;;;::::;;;;;;;.
        :;;;;;;;;;;::::;;;;;;;:
@@ -1651,13 +1692,13 @@ footer {
                        .......
                         .....
                          ...
-                          .</pre>
+                          .</pre></div>
           <div class="card-info">
             <div class="card-title">parenthesis hand<span class="card-dims">37x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                     .
+          <div class="art-wrap"><pre>                                     .
                                     . .
                                    .   .
                                   .     .
@@ -1718,13 +1759,13 @@ footer {
 .    .    .    .    .    .    .    .    .    .    .    .    .    .    .
 ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~   ~
 .                                                                         .
-~                                                                        ~</pre>
+~                                                                        ~</pre></div>
           <div class="card-info">
             <div class="card-title">sunken dory<span class="card-dims">75x62</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>
+          <div class="art-wrap"><pre>
 
 
 
@@ -1770,13 +1811,13 @@ footer {
          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</pre>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</pre></div>
           <div class="card-info">
             <div class="card-title">cold storage<span class="card-dims">63x47</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .:::.
+          <div class="art-wrap"><pre>      .:::.
     .:::::::;
    .:::::::::.
   .::::::::::::
@@ -1808,13 +1849,13 @@ footer {
        :@@:
         ::
         --=====--
-        ----=====----</pre>
+        ----=====----</pre></div>
           <div class="card-info">
             <div class="card-title">empty teapot<span class="card-dims">21x33</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>           ....
+          <div class="art-wrap"><pre>           ....
          ..::..
        ..;;;;..
      ..::####::..
@@ -1842,13 +1883,13 @@ footer {
  ~-~!~!~!~!~-
   ~!~!~!~!~!
    ~-~-~-~-
-     ....</pre>
+     ....</pre></div>
           <div class="card-info">
             <div class="card-title">serpent cast<span class="card-dims">20x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>              .   ,
+          <div class="art-wrap"><pre>              .   ,
             .       ,
           .           ,
         .               .
@@ -1877,13 +1918,13 @@ footer {
 .          .                         .
 .         .                           .
 .        .                             .
-.       ,                               ,</pre>
+.       ,                               ,</pre></div>
           <div class="card-info">
             <div class="card-title">spilled plums<span class="card-dims">41x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                 .::..::.
+          <div class="art-wrap"><pre>                 .::..::.
                ..:;~`!@#~:.
              .:;!`%#%@%#%!`:.
            .;!#@#%#%@%#@%#~:.
@@ -1914,13 +1955,13 @@ footer {
          .:;!`%#%@%#%@%#%!`:.
            .:;!@#%#@%#@%#@!:.
              ..:;`~!@#~!`:.
-                 .::..::.</pre>
+                 .::..::.</pre></div>
           <div class="card-info">
             <div class="card-title">barnacle husk<span class="card-dims">30x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .
+          <div class="art-wrap"><pre>                                      .
                                     . .
                                    .   :
                                   .     :
@@ -1992,13 +2033,13 @@ _                                                                        :
 #                                                                        :
 %                                                                        ;
 #                                                                        :
-%                                                                        ;</pre>
+%                                                                        ;</pre></div>
           <div class="card-info">
             <div class="card-title">barnacle growth<span class="card-dims">75x73</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..::;;::..
+          <div class="art-wrap"><pre>    ..::;;::..
    .::;;!;;::.
   ::;;!@#$;;;::
  ::;!@#%@#$;::
@@ -2026,13 +2067,13 @@ _                                                                        :
  ;!@#%@#%@#!;
  !@#%@#%@#@!;
  !@#%@#%@#@!;
-.!@#%@#%@#@!.</pre>
+.!@#%@#%@#@!.</pre></div>
           <div class="card-info">
             <div class="card-title">sunken pylon<span class="card-dims">15x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      . . .
+          <div class="art-wrap"><pre>                                      . . .
                                     . : : . .
                                   . : : : : . .
                                 . : : : : : : .
@@ -2075,13 +2116,13 @@ _                                                                        :
                                  . : : : : : : : : : :
                                    . : : : : : : : : :
                                      . : : : : : : : :
-                                       . : : : : : : :</pre>
+                                       . : : : : : : :</pre></div>
           <div class="card-info">
             <div class="card-title">offering hands<span class="card-dims">68x44</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .::~~..~:.  .::. .::.::.
+          <div class="art-wrap"><pre>   .::~~..~:.  .::. .::.::.
   .~:~:::.:: ~ .::.~:.::.::
  .~:..:.~:.:: ~:~.::.::.::.
 .:~.  .~:~::. ~: ::.::.::.
@@ -2109,13 +2150,13 @@ _                                                                        :
        .:.::.::.::.::.:.
         :~.:.:.:.:.::.:~
          .::.::.::.::.
-          ~:~::.~:~::</pre>
+          ~:~::.~:~::</pre></div>
           <div class="card-info">
             <div class="card-title">eel grass<span class="card-dims">27x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .  .   .  .  .  .  .  .   .  .
+          <div class="art-wrap"><pre>   .  .   .  .  .  .  .  .   .  .
   .   .   .   .   .   .   .   .  . .
  .  .  .  .   .  .  .   .   .  . . .
 .   .  .  .   .  .   .   .   .  .  .
@@ -2143,13 +2184,13 @@ _                                                                        :
 . .  .  . . . . . . . . . .  . . . .
 . .  . . . . . . . . . . . .  . . . .
 .. . . . . . . . . . . . . . .  . . .
-... . . . . . . . . . . . . . . . . .</pre>
+... . . . . . . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">holding pattern<span class="card-dims">37x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..::;;;;::..
+          <div class="art-wrap"><pre>    ..::;;;;::..
   .:'~~~~~~~~~~~~~':.
  .'  :~~~~~~~~~~~:  '.
  :.  :'~~~~~~~~~~':. :
@@ -2189,13 +2230,13 @@ _                                                                        :
    ##########
     ########
      ######
-      ####</pre>
+      ####</pre></div>
           <div class="card-info">
             <div class="card-title">biscuit tin<span class="card-dims">23x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          ..::;;;;::..
+          <div class="art-wrap"><pre>          ..::;;;;::..
        .::;;;;;;;;;;;;::.
      ::;;;;;;;;;;;;;;;;;;::
     ::;;;;;;;;;;;;;;;;;;;;::
@@ -2243,13 +2284,13 @@ _                                                                        :
 .........
 .........
 .........
-.........</pre>
+.........</pre></div>
           <div class="card-info">
             <div class="card-title">ginger jar<span class="card-dims">32x49</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      .
+          <div class="art-wrap"><pre>                                      .
                                     ..
                                    ...
                                   ::::
@@ -2308,13 +2349,13 @@ _                                                                        :
 |  | |  | |  |
 |  | |  | |  |
 |  | |  | |  |
-|  | |  | |  |</pre>
+|  | |  | |  |</pre></div>
           <div class="card-info">
             <div class="card-title">plastic tether<span class="card-dims">39x60</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                   .  .  .
+          <div class="art-wrap"><pre>                   .  .  .
                .  . : : : . .
            .  : ; ; ; : : : .  .
         .  : ; : : : : : : ; : .
@@ -2344,13 +2385,13 @@ _                                                                        :
         . : ; : : : : : : ; : .
            .  : ; ; ; ; ; : .
                .  . : : : . .
-                   .  .  .</pre>
+                   .  .  .</pre></div>
           <div class="card-info">
             <div class="card-title">stone reliquary<span class="card-dims">35x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>........................................
+          <div class="art-wrap"><pre>........................................
 ........................................
 .....................,,..................
 ..................;;;;;;,...............
@@ -2393,13 +2434,13 @@ _                                                                        :
 ........................................
 ........................................
 ........................................
-........................................</pre>
+........................................</pre></div>
           <div class="card-info">
             <div class="card-title">folded arms<span class="card-dims">42x44</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ..:..;.. :`..,` .!:. ..
+          <div class="art-wrap"><pre>   ..:..;.. :`..,` .!:. ..
   `..,:;.,..` :..,; .`. :..
  .:,.`..:;.;:,.`.. ,. .`...
 .;..;`.`..,:..,:;. .!.:,.`.
@@ -2427,13 +2468,13 @@ _                                                                        :
   ,;:,.`.,`;:,.`.`.,;:.
  .;:,.`.,:,.`;.,,:,.`;:,.
  :.,,:;.,.`:,.`;.,,:,.
- .`,:;.,..`.;`.`..,:;.,.</pre>
+ .`,:;.,..`.;`.`..,:;.,.</pre></div>
           <div class="card-info">
             <div class="card-title">dust mottling<span class="card-dims">27x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>            .:::.
+          <div class="art-wrap"><pre>            .:::.
           ,:::::,.
         ,:::::::,.
        ,::::::::::,.
@@ -2472,13 +2513,13 @@ _                                                                        :
    ,::.
   ,::.
  ,::.
-,::.</pre>
+,::.</pre></div>
           <div class="card-info">
             <div class="card-title">folded arms 01<span class="card-dims">29x40</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ..::;;::..
+          <div class="art-wrap"><pre>     ..::;;::..
    ..::;;;;;;::..
   .::;;;;;;;;;;::.
  .::;;;;;;;;;;;;::.
@@ -2509,13 +2550,13 @@ _                                                                        :
      `++`::
       `:`::
        .::
-        .::</pre>
+        .::</pre></div>
           <div class="card-info">
             <div class="card-title">cavern bloom<span class="card-dims">19x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    .::;;;::..  .:::;;;;;. .
+          <div class="art-wrap"><pre>    .::;;;::..  .:::;;;;;. .
   ..:::;;;;;;;::.::;;;;;;;;:.
  .:::;;;;;;;;;;;;;;;;;;;;;;:.
 :::;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2555,13 +2596,13 @@ _                                                                        :
    ;
   ;
  ;
-;</pre>
+;</pre></div>
           <div class="card-info">
             <div class="card-title">ruined pedestal<span class="card-dims">30x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .   .
+          <div class="art-wrap"><pre>                                       .   .
                                     .       .
                                  .             .
                               .                   .
@@ -2623,13 +2664,13 @@ _                                                                        :
 .                                                             .
 .                                                             .
 .                                                             .
-.                                                             .</pre>
+.                                                             .</pre></div>
           <div class="card-info">
             <div class="card-title">ruined sextant<span class="card-dims">66x63</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>         . . .   .   . .
+          <div class="art-wrap"><pre>         . . .   .   . .
        . . : : . . . : . .
      . : : : : . . : : : .
    . : : : : : . : : : : : .
@@ -2658,13 +2699,13 @@ _                                                                        :
      : : : : : :
        : : : :
          : :
-           .</pre>
+           .</pre></div>
           <div class="card-info">
             <div class="card-title">leaf fall<span class="card-dims">31x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .........................
+          <div class="art-wrap"><pre>   .........................
   .........................
  .........................
 ...........................
@@ -2696,13 +2737,13 @@ _                                                                        :
 .......------...........
 .......------...........
 ...........................
-...........................</pre>
+...........................</pre></div>
           <div class="card-info">
             <div class="card-title">biscuit stack<span class="card-dims">28x33</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .
+          <div class="art-wrap"><pre>                                       .
                                       : :
                                      .   :
                                     :     :
@@ -2777,13 +2818,13 @@ _                                                                        :
 :                                         :   :   :   :   :   :   :   :
 .                                           :   :   :   :   :   :   :   :
 :                                             :   :   :   :   :   :   :   :
-.                                               :   :   :   :   :   :   :   :</pre>
+.                                               :   :   :   :   :   :   :   :</pre></div>
           <div class="card-info">
             <div class="card-title">power lines<span class="card-dims">80x76</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ...................
+          <div class="art-wrap"><pre>     ...................
     ::::::::::::::::::::
    :::::::::::::::::::::::
   :::::::::::::::::::::::::
@@ -2812,13 +2853,13 @@ _                                                                        :
 :::::::::::::#####%::::::::::
 :::::::::::::#####@::::::::::
 :::::::::::::#####%::::::::::
-:::::::::::::#####@::::::::::</pre>
+:::::::::::::#####@::::::::::</pre></div>
           <div class="card-info">
             <div class="card-title">ramp descent<span class="card-dims">29x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>..................................................
+          <div class="art-wrap"><pre>..................................................
 ..................................................
 ..................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -2840,13 +2881,13 @@ _                                                                        :
 ........;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ........;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ........;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..</pre>
+................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;..</pre></div>
           <div class="card-info">
             <div class="card-title">brick alcove<span class="card-dims">50x23</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    . ; , ' ~ ! @ # $ % * - _ = + | / \
+          <div class="art-wrap"><pre>    . ; , ' ~ ! @ # $ % * - _ = + | / \
    . ; , ' ~ ! @ # $ % * - _ = + | / \
   . ; , ' ~ ! @ # $ % * - _ = + | / \
  . ; , ' ~ ! @ # $ % * - _ = + | / \
@@ -2874,13 +2915,13 @@ _                                                                        :
                    . ; , ' ~ ! @ # $ % * - _ = + |
                     . ; , ' ~ ! @ # $ % * - _ = +
                      . ; , ' ~ ! @ # $ % * - _ = +
-                      . ; , ' ~ ! @ # $ % * - _ =</pre>
+                      . ; , ' ~ ! @ # $ % * - _ =</pre></div>
           <div class="card-info">
             <div class="card-title">crystal heap<span class="card-dims">50x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>
+          <div class="art-wrap"><pre>
    . ; ' ~ ` ! $ % &amp; * + = - _
    . ; ' ~ ` ! $ % &amp; * + = - _
    . ; ' ~ ` ! $ % &amp; * + = - _
@@ -2928,13 +2969,13 @@ _                                                                        :
    . ; ' ~ ` ! $ % &amp; * + = - _
    . ; ' ~ ` ! $ % &amp; * + = - _
    . ; ' ~ ` ! $ % &amp; * + = - _
-   . ; ' ~ ` ! $ % &amp; * + = - _</pre>
+   . ; ' ~ ` ! $ % &amp; * + = - _</pre></div>
           <div class="card-info">
             <div class="card-title">rag pile<span class="card-dims">30x49</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                         .  .  .
+          <div class="art-wrap"><pre>                                         .  .  .
                                       .: : : : :
                                     .: : : : : : :
                                   .: : : : : : : :
@@ -2974,13 +3015,13 @@ _                                                                        :
    :   :   :   :   :   :
   .   .   .   .   .   .
  :   :   :   :   :   :
-:   :   :   :   :   :</pre>
+:   :   :   :   :   :</pre></div>
           <div class="card-info">
             <div class="card-title">iron bloom 01<span class="card-dims">55x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        .::;~  .::;~  .::;~  .::;~  .::;~
+          <div class="art-wrap"><pre>        .::;~  .::;~  .::;~  .::;~  .::;~
        :;~::;:;~::;:;~::;:;~::;:;~::;:
       ;~::;:;:;:;:;:;:;:;:;:;:;:;:;:;:
      ~::;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:
@@ -3019,13 +3060,13 @@ _                                                                        :
 ::~
 .::
 :;
-;~</pre>
+;~</pre></div>
           <div class="card-info">
             <div class="card-title">clay cracks<span class="card-dims">41x40</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>..................................................
+          <div class="art-wrap"><pre>..................................................
 ..................................................
 ..................................................
 ..................;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -3039,13 +3080,13 @@ _                                                                        :
 .;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 :;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre></div>
           <div class="card-info">
             <div class="card-title">kelp forest 01<span class="card-dims">50x15</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>def generate_rusting_crane():
+          <div class="art-wrap"><pre>def generate_rusting_crane():
     &quot;&quot;&quot;Generates ASCII art of a rusting crane.&quot;&quot;&quot;
 
     art = &quot;&quot;&quot;
@@ -3135,13 +3176,13 @@ _                                                                        :
     .:;Il!i&gt;&lt;~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&amp;8%B@$
     .:;Il!i&gt;&lt;~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&amp;8%B@$
     .:;Il!i&gt;&lt;~+_-?][}{1)(|\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&amp;8%B@$
-    .:;Il!i&gt;&lt;~+_-?][</pre>
+    .:;Il!i&gt;&lt;~+_-?][</pre></div>
           <div class="card-info">
             <div class="card-title">rusting crane<span class="card-dims">69x91</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    .:: :;: :;: :;: :;: :;: :;: :;: :;:
+          <div class="art-wrap"><pre>    .:: :;: :;: :;: :;: :;: :;: :;: :;:
     .:: :;: :;: :;: :;: :;: :;: :;: :;:
     .:: :;: :;: :;: :;: :;: :;: :;: :;:
     .:: :;: :;: :;: :;: :;: :;: :;: :;:
@@ -3215,13 +3256,13 @@ _                                                                        :
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre>
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre></div>
           <div class="card-info">
             <div class="card-title">submerged crank<span class="card-dims">42x75</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      . . . . . . . . . . .
+          <div class="art-wrap"><pre>      . . . . . . . . . . .
     .   .   .   .   .   .   .
   .     .     .     .     .     .
 .       .       .       .       .
@@ -3234,13 +3275,13 @@ _                                                                        :
 .                     .                     .
 .                       .                       .
 .                         .
-.           | | | | | | | | |</pre>
+.           | | | | | | | | |</pre></div>
           <div class="card-info">
             <div class="card-title">salt lick<span class="card-dims">49x14</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    +-+  +-+  +-+
+          <div class="art-wrap"><pre>    +-+  +-+  +-+
    | |  | |  | |
    +-+  +-+  +-+
   /   \ /   \ /   \
@@ -3260,13 +3301,13 @@ _                                                                        :
     .   .   .
    :   :   :
   .   .   .
- :   :   :</pre>
+ :   :   :</pre></div>
           <div class="card-info">
             <div class="card-title">engine grate<span class="card-dims">20x21</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    .   .   .   .   .   .   .   .   .   .
+          <div class="art-wrap"><pre>    .   .   .   .   .   .   .   .   .   .
    . ; : ; : ; : ; : ; : ; : ; : ; : .
   .  !  ;  !  ;  !  ;  !  ;  !  ;  !  ;  .
  .   ;  !  ;  !  ;  !  ;  !  ;  !  ;  !  ;  .
@@ -3275,13 +3316,13 @@ _                                                                        :
 .    !   ;   !   ;   !   ;   !   ;   !   ;    .
  .   ;  !  ;  !  ;  !  ;  !  ;  !  ;  !  ;  .
   .  !  ;  !  ;  !  ;  !  ;  !  ;  !  ;  .
-   . ; : ; : ; : ; : ; : ; : ; : ; : .</pre>
+   . ; : ; : ; : ; : ; : ; : ; : ; : .</pre></div>
           <div class="card-info">
             <div class="card-title">worn gauntlet<span class="card-dims">47x10</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .   .   .
+          <div class="art-wrap"><pre>   .   .   .
   :     :
   ;     ;
    `     `
@@ -3320,13 +3361,13 @@ _                                                                        :
   .       .
  :        :
  ;        :
-  `        .</pre>
+  `        .</pre></div>
           <div class="card-info">
             <div class="card-title">porcelain doll<span class="card-dims">12x40</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .:::.
+          <div class="art-wrap"><pre>                                       .:::.
                                      .:::::..
                                     .:::::..::.
                                    .:::::..::::.
@@ -3673,13 +3714,13 @@ _                                                                        :
 :::::..:::::::::::::..:::::::::::::..
 :::::..:::::::::::::..:::::::::::::::
 :::::..:::::::::::::..:::::::::::::..
-:::::..::::::::::::</pre>
+:::::..::::::::::::</pre></div>
           <div class="card-info">
             <div class="card-title">biscuit tin 01<span class="card-dims">55x348</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .   .
+          <div class="art-wrap"><pre>      .   .
      ;    ;
     +      +
    / \    / \
@@ -3714,13 +3755,13 @@ _                                                                        :
   +---+  +---+
   |   |  |   |
   \ /    \ /
-   `      `</pre>
+   `      `</pre></div>
           <div class="card-info">
             <div class="card-title">clasped hands<span class="card-dims">15x36</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .   ~   !   %   *   -   _   =   +   |   /
+          <div class="art-wrap"><pre>      .   ~   !   %   *   -   _   =   +   |   /
      .  :   ;   '   ~   !   @   #   %   *   -   _
     . : ; ' ~ ! @ # % * - _ = + | / \
    . : ; ' ~ ! @ # % * - _ = + | / \
@@ -3762,13 +3803,13 @@ _                                                                        :
 . : ; ' ~ ! @ # % * - _ = + | / \
 . : ; ' ~ ! @ # % * - _ = + | / \
 . : ; ' ~ ! @ # % * - _ = + | / \
-. : ; ' ~ ! @ # % * - _ = + | / \</pre>
+. : ; ' ~ ! @ # % * - _ = + | / \</pre></div>
           <div class="card-info">
             <div class="card-title">broken broadcast<span class="card-dims">49x43</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .   :    ;
+          <div class="art-wrap"><pre>      .   :    ;
      .   :    ;
     .   :    ;
    .   :    ;
@@ -3821,13 +3862,13 @@ _                                                                        :
 :   :    ;
 :   :    ;
 :   :    ;
-:   :    ;</pre>
+:   :    ;</pre></div>
           <div class="card-info">
             <div class="card-title">ruined anthem<span class="card-dims">16x54</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..;;.  .  ;::..
+          <div class="art-wrap"><pre>    ..;;.  .  ;::..
   .:::::  .  :;;:
  ::::::::  .  :::::
 :::::~~~~.  .  :::::
@@ -3848,13 +3889,13 @@ _                                                                        :
 :::::~~~~.~~~~.
  ::::::::~~~~.
   .:::::~~~~.
-    ..;;.  .</pre>
+    ..;;.  .</pre></div>
           <div class="card-info">
             <div class="card-title">harbor buoy<span class="card-dims">20x22</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      ..;;.  .  .
+          <div class="art-wrap"><pre>      ..;;.  .  .
      .;;;;;. .;;.
     ;;;;;;;;;;;;
    .;;;;;;;;;;;.
@@ -3896,13 +3937,13 @@ _                                                                        :
 .                                  ;;
 .                                   ;;
 .                                    ;;
-.                                     ;;</pre>
+.                                     ;;</pre></div>
           <div class="card-info">
             <div class="card-title">clutching hands<span class="card-dims">41x43</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      ..:;~!@#%-_/ \
+          <div class="art-wrap"><pre>      ..:;~!@#%-_/ \
    .:;~!@#%-_/ \  /
   :;~!@#%-_/ \ /
  :~!@#%-_/ \ /
@@ -3955,13 +3996,13 @@ _                                                                        :
                                               \
                                                \
                                                 \
-                                                 \</pre>
+                                                 \</pre></div>
           <div class="card-info">
             <div class="card-title">lemon zest<span class="card-dims">50x54</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      ,~.,
+          <div class="art-wrap"><pre>      ,~.,
      :;:~.,
     ;;;:%%
    /-%%%%/
@@ -3988,13 +4029,13 @@ _                                                                        :
 //           |  \    \
 //           |.' \    \
 //          _\    \.-' \ MJP
-//         (___.-(__.'/</pre>
+//         (___.-(__.'/</pre></div>
           <div class="card-info">
             <div class="card-title">yellow stack<span class="card-dims">28x28</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    . ; :  . ; :
+          <div class="art-wrap"><pre>    . ; :  . ; :
    . :  . ; :  .
   . :  . ; :  . :
  . :  . ; :  . :  .
@@ -4006,13 +4047,13 @@ _                                                                        :
     . ; :  . ; :
        . ; :  .
           . ; :
-             . ;</pre>
+             . ;</pre></div>
           <div class="card-info">
             <div class="card-title">cracked pavement<span class="card-dims">22x13</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          . : ; , ' ~ ! @ # $ % * - _ = +
+          <div class="art-wrap"><pre>          . : ; , ' ~ ! @ # $ % * - _ = +
         . : ; , ' ~ ! @ # $ % * - _ = + |
        . : ; , ' ~ ! @ # $ % * - _ = + | /
       . : ; , ' ~ ! @ # $ % * - _ = + | /
@@ -4048,9 +4089,82 @@ _                                                                        :
                       ' ~ ! @ # $ % * - _
                        ' ~ ! @ # $ % * - _
                         ' ~ ! @ # $ % * -
-                         ' ~ ! @ # $ % * -</pre>
+                         ' ~ ! @ # $ % * -</pre></div>
           <div class="card-info">
             <div class="card-title">stone rib<span class="card-dims">42x37</span></div>
+          </div>
+        </div>
+        <div class="archive-card">
+          <div class="art-wrap"><pre>        .  .:; ,
+       :  : ;  :
+      :   :  :  :
+     :    :   :
+    :     :    :
+   :      :     :
+  :       :      :
+ :        :       :
+:         :        :
+:          :         :
+.           .          .
+.            .           .
+.             .            .
+.              .             .
+.               .              .
+.                .               .
+.                 .                .
+.                  .                 .
+.                   .                  .
+.                    .                   .
+.                     .                    .
+:                     :                     :
+:                      :                      :
+:                       :                       :
+:                        :
+:                         :</pre></div>
+          <div class="card-info">
+            <div class="card-title">empty lift<span class="card-dims">49x26</span></div>
+          </div>
+        </div>
+        <div class="archive-card">
+          <div class="art-wrap"><pre>        .:::.  .:::.
+       :::.  .:::.
+      :::::.  :::::.
+     :::::::  :::::::
+    :::::~~~:::::
+   ::::: ~~~~:::::
+  ::::  ~~~  ::::
+ ::::  ~~~~  ::::
+::::  ~~~~~  ::::
+::::: ~~~~~  ::::
+:::::  ~~~~  ::::
+:::::  ~~~~  ::::
+ :::::  ~~~~  ::::
+  ::::  ~~~~  ::::
+   ::::: ~~~~:::::
+    :::::~~~:::::
+     :::::::  :::::::
+      :::::.  :::::.
+       :::.  .:::.
+        .:::.  .:::.
+           ..
+           ..
+           ..
+        .--.
+       /    \
+      |      |
+      |      |
+      \      /
+       `----'
+         ||
+         ||
+         ||
+         ||
+        ====
+        ====
+        ====
+        ====</pre></div>
+          <div class="card-info">
+            <div class="card-title">submerged buick<span class="card-dims">21x37</span></div>
           </div>
         </div>
       </div>
@@ -4059,7 +4173,7 @@ _                                                                        :
       <div class="date-heading">2026-03-31</div>
       <div class="archive-grid">
         <div class="archive-card">
-          <pre>                                      .::'
+          <div class="art-wrap"><pre>                                      .::'
                                     .::''::.
                                   .::'''''::.
                                 .::''::::::''::.
@@ -4117,13 +4231,13 @@ _                                                                        :
  %%%%%%%%%%%%''::::::::::::::::::::::::::::::::::::::::::::::::::::''::
  %%%%%%%%%%%%''::::::::::::::::::::::::::::::::::::::::::::::::::::''::
  &amp;%%%%%%%%%%%''::::::::::::::::::::::::::::::::::::::::::::::::::::''::
- &amp;&amp;%%%%%%%%%%''::::::::::::::::::::::::::::::::::::::::::::::::::::''::</pre>
+ &amp;&amp;%%%%%%%%%%''::::::::::::::::::::::::::::::::::::::::::::::::::::''::</pre></div>
           <div class="card-info">
             <div class="card-title">amber reservoir<span class="card-dims">71x59</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          ....,,;;,,....
+          <div class="art-wrap"><pre>          ....,,;;,,....
        .:;;;;;;;;;;;;;;;;:.
      .;;;;;;;;;;;;;;;;;;;;;;.
     :;;;;;;;;;;;;;;;;;;;;;;;;:
@@ -4151,13 +4265,13 @@ _                                                                        :
        .:;;;;;;;;;;;;;;;;;;:.
           ....,,;;,,....
                ~~~~
-                !!</pre>
+                !!</pre></div>
           <div class="card-info">
             <div class="card-title">lemon press<span class="card-dims">34x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ..::;;::::;;::..
+          <div class="art-wrap"><pre>     ..::;;::::;;::..
    .::;;::::::::::::;;:.
   ::;;::::::::::::::::;;:
  .;;::........:::::....;;.
@@ -4187,13 +4301,13 @@ _                                                                        :
  .;;::::::::::::::;;
 ;;::::::::::::::::;;
 ;;::::::::::::::::;;
-;;::::::::::::::::;;</pre>
+;;::::::::::::::::;;</pre></div>
           <div class="card-info">
             <div class="card-title">worn armchair<span class="card-dims">27x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   . . : : . . . . . . .
+          <div class="art-wrap"><pre>   . . : : . . . . . . .
   . : : : : : : : : . . .
  . : : : : : : : : : : .
 :. : . : : : : : . : : .
@@ -4222,24 +4336,24 @@ _                                                                        :
 : : : @ # % : . : : : :
 : : : @ # % : . : : : :
 : : : : : : : . : : : :
- . . . . . . . . . . . .</pre>
+ . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">sediment column<span class="card-dims">25x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..::''::..
+          <div class="art-wrap"><pre>    ..::''::..
    .::''``;;``::.
   ::''``;;``;;``::
  .:'``;;``;;``;;`:.
 ::``;;``;;``;;``::
-:`'``;;``;;``;;</pre>
+:`'``;;``;;``;;</pre></div>
           <div class="card-info">
             <div class="card-title">ember hearth<span class="card-dims">19x6</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        . : .
+          <div class="art-wrap"><pre>        . : .
       . :   : .
     . :     : .
    : :       : :
@@ -4270,13 +4384,13 @@ _                                                                        :
      |       |
      \       /
       \     /
-        . : .</pre>
+        . : .</pre></div>
           <div class="card-info">
             <div class="card-title">pressed palms<span class="card-dims">20x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ..,:;+~::.~;:.
+          <div class="art-wrap"><pre>     ..,:;+~::.~;:.
    .,:;+~::.~;:.   .
   ,:;+~::.~;:.     :
  ,:;+~::.~;:.      .
@@ -4305,13 +4419,13 @@ _                                                                        :
            ,:       .
             ,:      :
              ,:     .
-              ,:    :</pre>
+              ,:    :</pre></div>
           <div class="card-info">
             <div class="card-title">shale layers<span class="card-dims">21x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                         ...::;;::...
+          <div class="art-wrap"><pre>                         ...::;;::...
                      .::;;;;;;;;;;::.
                    ::;;;;;;;;;;;;;;;;::
                  ::;;;;;;;;;;;;;;;;;;;;::
@@ -4359,13 +4473,13 @@ _                                                                        :
                          /           \
                         |             |
                         \           /
-                         -=-=-=-=-=-</pre>
+                         -=-=-=-=-=-</pre></div>
           <div class="card-info">
             <div class="card-title">gear spine<span class="card-dims">53x49</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                                .
+          <div class="art-wrap"><pre>                                                .
                                               .  `
                                             .   :
                                           .    ;
@@ -4418,13 +4532,13 @@ _                                                                        :
                        .   :
                         .  ;
                          . `
-                          . :</pre>
+                          . :</pre></div>
           <div class="card-info">
             <div class="card-title">receiver spiral<span class="card-dims">50x54</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..,:;~*!@#$%.
+          <div class="art-wrap"><pre>    ..,:;~*!@#$%.
    .::;~*!@#$%.
   ,:;~*!@#$%.
  .;~*!@#$%.
@@ -4453,13 +4567,13 @@ $%.
                .
                 :
                  .
-                  :</pre>
+                  :</pre></div>
           <div class="card-info">
             <div class="card-title">withered vine<span class="card-dims">19x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>       . : .  : .  . :
+          <div class="art-wrap"><pre>       . : .  : .  . :
     :   .   :   .   . :
   .   :   .   :   .   . :
  :  . : . . : . : . : .  :
@@ -4488,13 +4602,13 @@ $%.
 . : . : . : . : . : . : . :
  : . : . : . : . : . : . :
 . : . : . : . : . : . : . :
- : . :  . : . :  . : : . :</pre>
+ : . :  . : . :  . : : . :</pre></div>
           <div class="card-info">
             <div class="card-title">glass orchard<span class="card-dims">27x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          . . . . . . . .
+          <div class="art-wrap"><pre>          . . . . . . . .
         . . . . . . . . . .
       . . . . . . . . . . . .
     . . . . . . . . . . . . . .
@@ -4530,13 +4644,13 @@ $%.
     . . . . . . . . . . . . . .
       . . . . . . . . . . . .
         . . . . . . . . . .
-          . . . . . . . .</pre>
+          . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">crimson specimen<span class="card-dims">35x37</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ..::;;::..
+          <div class="art-wrap"><pre>   ..::;;::..
   .:;:::::::::;.
  .;;::::::::::::;;.
 .;::::::::::::::::;:.
@@ -4567,13 +4681,13 @@ $%.
 .;::::::::::::::::;:.
  .;;::::::::::::;;.
   .:;:::::::::;.
-   ..::;;::..</pre>
+   ..::;;::..</pre></div>
           <div class="card-info">
             <div class="card-title">rain gutters<span class="card-dims">26x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..::;;;;::..
+          <div class="art-wrap"><pre>    ..::;;;;::..
   .:;;;;;;;;;;;;:..
  .;;;;;;;;;;;;;;;;:.
 ;;;;;;;;;;;;;;;;;;;;
@@ -4602,13 +4716,13 @@ $%.
             ::==::
               ::::
                ::
-                .</pre>
+                .</pre></div>
           <div class="card-info">
             <div class="card-title">cast iron hull<span class="card-dims">24x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .
+          <div class="art-wrap"><pre>                                       .
                                       : :
                                      :   :
                                     :     :
@@ -4638,13 +4752,13 @@ $%.
             :
            :
           :
-         .</pre>
+         .</pre></div>
           <div class="card-info">
             <div class="card-title">fly paths<span class="card-dims">50x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ...:,.   ,:,.   ...
+          <div class="art-wrap"><pre>   ...:,.   ,:,.   ...
   ,:,.    .:,.    ,:,.
  .:,.     ,:,.     ,:,.
 :,.      ,:,.      ,:,.
@@ -4674,13 +4788,13 @@ $%.
   ;~~~!~~~~~~~;
    ;~~~~~~~~~;
     ~~~~~~~~~
-     .......</pre>
+     .......</pre></div>
           <div class="card-info">
             <div class="card-title">kelp embrace<span class="card-dims">23x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ...`..`..`..`..`..`..`..
+          <div class="art-wrap"><pre>   ...`..`..`..`..`..`..`..
   .::`..`::`..`::`..`::`..`:.
  .:`..`:`..`:`..`:`..`:`..`:`..
  :`..`:`..`:`..`:`..`:`..`:`..`
@@ -4714,13 +4828,13 @@ $%.
            .`~`~`~`~`..
           `~`~`~`~`~`..
          .~`~`~`~`~`..
-        `~`~`~`~`~`~`..</pre>
+        `~`~`~`~`~`~`..</pre></div>
           <div class="card-info">
             <div class="card-title">filament knot<span class="card-dims">32x35</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                     .  .   . .
+          <div class="art-wrap"><pre>                                     .  .   . .
                                   .  :  . . :  .
                                 .  ; :   .  : . ;
                                :  .  ; :   :  ;  .
@@ -4790,13 +4904,13 @@ $%.
                               :  .  ; :
                                . :  . :
                                 :  .  :
-                                 .  . .</pre>
+                                 .  . .</pre></div>
           <div class="card-info">
             <div class="card-title">shattered display<span class="card-dims">53x71</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>              . . . .
+          <div class="art-wrap"><pre>              . . . .
            . . : : . .
          . : ; ; : . . .
         : ; ! ! ; : . .
@@ -4825,13 +4939,13 @@ $%.
 . . - - - - - - . .
 . . . - - - - . . .
 . . . . . . . . . .
-. . . . . . . . . .</pre>
+. . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">porcelain shards<span class="card-dims">24x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        .....:::::,,,,
+          <div class="art-wrap"><pre>        .....:::::,,,,
      ..:::;;;;;;;;;;:::..
    ..::;;;;;;;;;;;;;;;;:::..
   .::;;;;;;;;;;;;;;;;;;;;:::..
@@ -4878,13 +4992,13 @@ $%.
   .::;;;;;;;;;;;;~~~;;;;::..
    ..::;;;;;;;;;;;~~~;;;::..
      ..::::;;;~~~;;::::..
-        .....::~~~::.....</pre>
+        .....::~~~::.....</pre></div>
           <div class="card-info">
             <div class="card-title">molars<span class="card-dims">33x48</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ..,:;!~`:. . . . . . .
+          <div class="art-wrap"><pre>   ..,:;!~`:. . . . . . .
   .,:;!~`:. . . . . . . . .
  .,:;!~`:. . . . . . . . . .
 .:;!~`:. . . . . . . . . . .
@@ -4912,13 +5026,13 @@ $%.
 `:. . . . . . . . . . . . . .
 :. . . . . . . . . . . . . .
 . . . . . . . . . . . . . .
-. . . . . . . . . . . . . .</pre>
+. . . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">nail beds<span class="card-dims">32x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   . . : . : . . : . : . . : .
+          <div class="art-wrap"><pre>   . . : . : . . : . : . . : .
   . . : . : . : . . : . : . : .
  . : . : . : . : . . : . : . : .
 . : . : . : . : . : . : . : . : .
@@ -4963,13 +5077,13 @@ $%.
 . : . : . : . : . : . : . : . : .
  : . : . : . : . : . : . : . : .
   . . : . : . . : . : . . : . .
-   . . : . : . . : . : . . : .</pre>
+   . . : . : . . : . : . . : .</pre></div>
           <div class="card-info">
             <div class="card-title">wren’s skull<span class="card-dims">33x46</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        .   .   .   .
+          <div class="art-wrap"><pre>        .   .   .   .
       .   .   .   .   .
     .   .   .   .   .   .
   .   .   .   .   .   .   .
@@ -5012,13 +5126,13 @@ $%.
                       .   .   .   .   .
                        .   .   .   .   .
                         .   .   .   .   .
-                         .   .   .   .   .</pre>
+                         .   .   .   .   .</pre></div>
           <div class="card-info">
             <div class="card-title">stone breath<span class="card-dims">42x44</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ..::;;;;::..
+          <div class="art-wrap"><pre>    ..::;;;;::..
   .'`~!@#$%^&amp;*`'.
  :;;  !@#%&amp;*~!  ;;:
 .`:   @#%&amp;*!@#   `: .
@@ -5048,13 +5162,13 @@ $%.
 `:.         .:`
    `~!!~`
      `!!`
-     ``</pre>
+     ``</pre></div>
           <div class="card-info">
             <div class="card-title">fault portrait<span class="card-dims">21x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>    ...::..::..:..:..:..:.
+          <div class="art-wrap"><pre>    ...::..::..:..:..:..:.
   ..::.:.:.:.:.:.:.:.:.:.:.::.
  .::.:.:.:.:.:.:.:.:.:.:.:.:.:.
 ::.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:
@@ -5099,13 +5213,13 @@ $%.
 :.:::.
  .:::.
   ..:
-   ..</pre>
+   ..</pre></div>
           <div class="card-info">
             <div class="card-title">kelp forest<span class="card-dims">32x46</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>..........................
+          <div class="art-wrap"><pre>..........................
 ..........................
 ..........................
 .................#........
@@ -5150,13 +5264,13 @@ $%.
 ............................
 ............................
 ............................
-............................</pre>
+............................</pre></div>
           <div class="card-info">
             <div class="card-title">melting cube<span class="card-dims">29x46</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     .   .  .  .    .
+          <div class="art-wrap"><pre>     .   .  .  .    .
     .   :  .  .   . :
    .   :  ;  .   : ; .
   .   :  ;  .   : ;  .
@@ -5185,13 +5299,13 @@ $%.
             .!.
              !
              |
-             |</pre>
+             |</pre></div>
           <div class="card-info">
             <div class="card-title">salt garden<span class="card-dims">22x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      . : ; . : ; . : ; .
+          <div class="art-wrap"><pre>      . : ; . : ; . : ; .
     . : ; . : ; . : ; . : ;
   . : ; . : ; . : ; . : ; . :
  . : ; . : ; . : ; . : ; . : ;
@@ -5221,13 +5335,13 @@ $%.
 .......#@#@#@#@#@#@#@.......
 .......#@#@#@#@#@#@#@.......
 .........|||||||||||||.........
-.........|||||||||||||.........</pre>
+.........|||||||||||||.........</pre></div>
           <div class="card-info">
             <div class="card-title">winter vent<span class="card-dims">32x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>         ..::..
+          <div class="art-wrap"><pre>         ..::..
        ..:::;;::..
      .:::;;:;;:;;.
    .::;;:;;:;;:;;:.
@@ -5254,13 +5368,13 @@ $%.
 :;;:;;:;;:;;:;;:;;:
 :;;:;;:;;:;;:;;:;;:
 ;;:;;:;;:;;:;;:;;:;;
-;;:;;:;;:;;:;;:;;:;;</pre>
+;;:;;:;;:;;:;;:;;:;;</pre></div>
           <div class="card-info">
             <div class="card-title">bent reeds<span class="card-dims">20x28</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ..,,::;;..
+          <div class="art-wrap"><pre>   ..,,::;;..
   .,,:;~`'..,;
  .,;:;~`'..,;:.
 .:;::;~``'..,::.
@@ -5288,13 +5402,13 @@ $%.
 ;::;
 ;::;
 ::;
-;;</pre>
+;;</pre></div>
           <div class="card-info">
             <div class="card-title">woven membrane<span class="card-dims">16x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .
+          <div class="art-wrap"><pre>                                       .
                                       . .
                                      .   .
                                     .     .
@@ -5374,13 +5488,13 @@ $%.
                                     \     /
                                      \   /
                                       \ /
-                                       v</pre>
+                                       v</pre></div>
           <div class="card-info">
             <div class="card-title">crimson filament<span class="card-dims">79x81</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .
+          <div class="art-wrap"><pre>                                       .
                                     .   :
                                   .     ;
                                 .       '
@@ -5432,13 +5546,13 @@ $   $   $   $   $   $   $   $   $   $ $
 -   -   -   -   -   -   -   -   -   - -
 _   _   _   _   _   _   _   _   _   _ _
 =   =   =   =   =   =   =   =   =   = =
-.   .   .   .   .   .   .   .   .   . .</pre>
+.   .   .   .   .   .   .   .   .   . .</pre></div>
           <div class="card-info">
             <div class="card-title">broken compass<span class="card-dims">41x53</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                        . .
+          <div class="art-wrap"><pre>                                        . .
                                       .   .
                                     .     .
                                   .       .
@@ -5517,13 +5631,13 @@ _   _   _   _   _   _   _   _   _   _ _
                               .  .
                                .  .
                                 .  .
-                                 ..</pre>
+                                 ..</pre></div>
           <div class="card-info">
             <div class="card-title">crimson aperture<span class="card-dims">44x80</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      ..
+          <div class="art-wrap"><pre>                                      ..
                                    .. : ..
                                  .. : ; : ..
                                 .. : ; ' : ..
@@ -5593,13 +5707,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ...
 ...
 ...
-...</pre>
+...</pre></div>
           <div class="card-info">
             <div class="card-title">conduit bloom<span class="card-dims">45x71</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                        ..,:,.
+          <div class="art-wrap"><pre>                                        ..,:,.
                                       .,::,,::,.
                                     .,:::::,,::::,.
                                   .,::::::,,::::::,.
@@ -5673,13 +5787,13 @@ _   _   _   _   _   _   _   _   _   _ _
 :,,,,::::::::::::::::::::::::::::::::::::::::::::::,,,::::::::::::::::::::::::::
 :,,,,:::::::::::::::::::::::::::::::::::::::::::::::,,,:::::::::::::::::::::::::
 :,,,,::::::::::::::::::::::::::::::::::::::::::::::,,,::::::::::::::::::::::::::
-:,,,,:::::::::::::::::::::::::::::::::::::::::::::::,,,:::::::::::::::::::::::::</pre>
+:,,,,:::::::::::::::::::::::::::::::::::::::::::::::,,,:::::::::::::::::::::::::</pre></div>
           <div class="card-info">
             <div class="card-title">hull breach<span class="card-dims">80x75</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      ,.`~:~:`.,
+          <div class="art-wrap"><pre>      ,.`~:~:`.,
     ,:~`   `~:. ,:
    :`   :   :   `:
   .~   :   :   ~.
@@ -5692,13 +5806,13 @@ _   _   _   _   _   _   _   _   _   _ _
    :`   :   :   `:
     ,:~`   `~:. ,:
       ,.`~:~:`.,
-    :~</pre>
+    :~</pre></div>
           <div class="card-info">
             <div class="card-title">relic shell<span class="card-dims">18x14</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>       .::;;::,.
+          <div class="art-wrap"><pre>       .::;;::,.
      ,;:::;;;;::.
    .;:::::;;;;;;;.
   :;::::::;;;;;;::
@@ -5742,13 +5856,13 @@ _   _   _   _   _   _   _   _   _   _ _
          ;;;.
           ;;.
            ;.
-            .</pre>
+            .</pre></div>
           <div class="card-info">
             <div class="card-title">root claim<span class="card-dims">20x45</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                  _,-._
+          <div class="art-wrap"><pre>                                  _,-._
                                  / \_/ \
                                 &gt;-(_)-&lt;
                                  \_/ \_/
@@ -5792,13 +5906,13 @@ _   _   _   _   _   _   _   _   _   _ _
      /-----------------------\ /------------------
     |-------------------------| |-----------------
     \-----------------------/ \-------------------
-     `---------------------'   `------------------</pre>
+     `---------------------'   `------------------</pre></div>
           <div class="card-info">
             <div class="card-title">root push<span class="card-dims">50x45</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       .
+          <div class="art-wrap"><pre>                                       .
                                     . :
                                   .  : :
                                 .   : : :
@@ -5835,13 +5949,13 @@ _   _   _   _   _   _   _   _   _   _ _
     ###########                       : : : : : :
   #############                        : : : : : :
  ###############                         : : : : :
-#################                          : : : :</pre>
+#################                          : : : :</pre></div>
           <div class="card-info">
             <div class="card-title">bone orchard<span class="card-dims">50x38</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      ...::;;::...
+          <div class="art-wrap"><pre>      ...::;;::...
     .::;;;;;;;;;;::.
    ::;;;;;;;;;;;;;;::
   ::;;;;;;;;;;;;;;;;::
@@ -5874,13 +5988,13 @@ _   _   _   _   _   _   _   _   _   _ _
         #####
        #######
       #########
-     ###########</pre>
+     ###########</pre></div>
           <div class="card-info">
             <div class="card-title">bent spoon<span class="card-dims">23x34</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ...::;;..::...
+          <div class="art-wrap"><pre>     ...::;;..::...
    .::,,;;..::;;,,::.
   :::;;,,'.,:;,'.,;;:::
  .::;;,,'..':...''.,;;::.
@@ -5908,13 +6022,13 @@ _   _   _   _   _   _   _   _   _   _ _
      ...::;;..::...
         .::;;:.
            :;;:
-             ;;</pre>
+             ;;</pre></div>
           <div class="card-info">
             <div class="card-title">signal wash<span class="card-dims">29x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .  .   .   .  .
+          <div class="art-wrap"><pre>      .  .   .   .  .
      .    :   :   :   .
     .     `   `   `   :
    .       .   .   .   `
@@ -5943,13 +6057,13 @@ _   _   _   _   _   _   _   _   _   _ _
                      .   `   `   :
                       .   .   .   `
                        `   :   `
-                        `   `</pre>
+                        `   `</pre></div>
           <div class="card-info">
             <div class="card-title">bent spoon 31<span class="card-dims">35x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>..............................
+          <div class="art-wrap"><pre>..............................
 ............................../
 ............................../
 .........................../
@@ -5999,13 +6113,13 @@ _   _   _   _   _   _   _   _   _   _ _
 .
 .
 .
-.</pre>
+.</pre></div>
           <div class="card-info">
             <div class="card-title">warehouse corner<span class="card-dims">31x51</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .. .. .. .. .. .. .. .. .. .. .. .. .. ..
+          <div class="art-wrap"><pre>   .. .. .. .. .. .. .. .. .. .. .. .. .. ..
   .  .  .  .  .  .  .  .  .  .  .  .  .  .
  .   .   .   .   .   .   .   .   .   .   .
 .    .    .    .    .    .    .    .    .
@@ -6035,13 +6149,13 @@ _   _   _   _   _   _   _   _   _   _ _
 @    @    @    @    @    @    @    @    @
 @    @    @    @    @    @    @    @    @
    @    @    @    @    @    @    @    @
-     @    @    @    @    @    @    @    @</pre>
+     @    @    @    @    @    @    @    @</pre></div>
           <div class="card-info">
             <div class="card-title">linen curtain<span class="card-dims">44x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      ...
+          <div class="art-wrap"><pre>                                      ...
                                     ..::..
                                   .::' .::.
                                  ::;  :;::
@@ -6101,13 +6215,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ::                                                        :
 .;                                                         :
 ::                                                          :
-.:                                                           :</pre>
+.:                                                           :</pre></div>
           <div class="card-info">
             <div class="card-title">wren’s quill<span class="card-dims">80x61</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                 . . . . .
+          <div class="art-wrap"><pre>                 . . . . .
                . : : : : : .
              . ; ; ; ; ; ; : .
            . ~ ! ~ ! ~ ! ~ ; : .
@@ -6136,13 +6250,13 @@ _   _   _   _   _   _   _   _   _   _ _
 : ; . ! : . ~ : . ! : . ~ : . ! : . ;
 ; : . ~ : . ! : . ~ : . ! : . ~ : . ;
 . : ; . ! : . ~ : . ! : . ~ : . ! : ;
-. ! : . ~ : . ! : . ~ : . ! : . ~ ; :</pre>
+. ! : . ~ : . ! : . ~ : . ! : . ~ ; :</pre></div>
           <div class="card-info">
             <div class="card-title">spore print<span class="card-dims">38x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>.........................................
+          <div class="art-wrap"><pre>.........................................
 .........................................
 .........................................
 .........................................
@@ -6170,13 +6284,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ..;::::::::::::::::::::::::::::::::;..
 .;::::::::::::::::::::::::::::::::::;..
 .;::::::::::::::::::::::::::::::::::;..
-@#+==++++++++++++++++++++++++++++++#@</pre>
+@#+==++++++++++++++++++++++++++++++#@</pre></div>
           <div class="card-info">
             <div class="card-title">fault shiver<span class="card-dims">41x29</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>           ..::;;:,.
+          <div class="art-wrap"><pre>           ..::;;:,.
         ..:;%&amp;~-._::..
      .:;%~-+/~-..:;;:,.
    .:;%~-+/~-..:;;:,.
@@ -6216,13 +6330,13 @@ _   _   _   _   _   _   _   _   _   _ _
           /     \
          /       \
         /         \
-       +-----------+</pre>
+       +-----------+</pre></div>
           <div class="card-info">
             <div class="card-title">turbine bloom<span class="card-dims">23x41</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     .   .   .   .   .   .   .
+          <div class="art-wrap"><pre>     .   .   .   .   .   .   .
    .   :   .   :   .   :   .   :
  .   ;   .   ;   .   ;   .   ;   .
 :   `   :   `   :   `   :   `   :
@@ -6258,13 +6372,13 @@ _   _   _   _   _   _   _   _   _   _ _
  `   +   `   +   `   +   `   +   `
 .   -   .   -   .   -   .   -   .
 :   _   :   _   :   _   :   _   :
-.   @   .   @   .   @   .   @   .</pre>
+.   @   .   @   .   @   .   @   .</pre></div>
           <div class="card-info">
             <div class="card-title">lemon grove<span class="card-dims">34x37</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        ..,:;+==++==-.;:,.
+          <div class="art-wrap"><pre>        ..,:;+==++==-.;:,.
      .:;;+==++==++==++==+;;:.
    .;;+==++==++==++==++==++;;:.
   :;+==++==++==++==++==++==++;:
@@ -6297,13 +6411,13 @@ _   _   _   _   _   _   _   _   _   _ _
   :;+==++==++==++==+;:
  .:;+==++==++==++==+;.
  :;+==++==++==++==+;:
-.+==++==++==++==++==+.</pre>
+.+==++==++==++==++==+.</pre></div>
           <div class="card-info">
             <div class="card-title">pipe junction<span class="card-dims">34x34</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                       ..
+          <div class="art-wrap"><pre>                                       ..
                                     .::;;.
                                   .::;;~~;;.
                                 .::;;~~~;;;;.
@@ -6356,13 +6470,13 @@ _   _   _   _   _   _   _   _   _   _ _
 .::;;~~~~~~~~~~~;;;;;.
  .::;;~~~~~~~~;;;;.
    .::;;~~~;;;.
-      ..</pre>
+      ..</pre></div>
           <div class="card-info">
             <div class="card-title">cobalt bloom<span class="card-dims">49x54</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                      ..
+          <div class="art-wrap"><pre>                                      ..
                                     .:::.
                                    :::::::
                                   :::::::::
@@ -6416,13 +6530,13 @@ _   _   _   _   _   _   _   _   _   _ _
 :::::::::::::::
 :::::::::::::::
 :::::::::::::::
-:::::::::::::::</pre>
+:::::::::::::::</pre></div>
           <div class="card-info">
             <div class="card-title">copper vein<span class="card-dims">46x55</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>============================================
+          <div class="art-wrap"><pre>============================================
 ============================================
 ============================================
 ============================================
@@ -6451,13 +6565,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ============================================
 ============================================
 ============================================
-============================================</pre>
+============================================</pre></div>
           <div class="card-info">
             <div class="card-title">grit line<span class="card-dims">44x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                          .
+          <div class="art-wrap"><pre>                                          .
                                        . . .
                                      . . . .
                                    . . . . .
@@ -6508,13 +6622,13 @@ _   _   _   _   _   _   _   _   _   _ _
 . . . . . . . . . . . . . . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . . . .
 . . . . . . . . . . . . . . . . . . . . . .
-. . . . . . . . . . . . . . . . . . . . . .</pre>
+. . . . . . . . . . . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">dented prism<span class="card-dims">44x52</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     .  .   .   .   .
+          <div class="art-wrap"><pre>     .  .   .   .   .
     .  .  :  :  .   .
    .  :  :  ;  :  .   .
   .  :  ;  ;  :  .   .
@@ -6541,13 +6655,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ;  ;  ;  ;  ;  ;  ;
 ;  ;  ;  ;  ;  ;  ;
 ;  ;  ;  ;  ;  ;  ;
-;  ;  ;  ;  ;  ;  ;</pre>
+;  ;  ;  ;  ;  ;  ;</pre></div>
           <div class="card-info">
             <div class="card-title">pipe network<span class="card-dims">23x28</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                          .::..
+          <div class="art-wrap"><pre>                                          .::..
                                       .:;::':::::.
                                     .;;::'::::::;::.
                                   .;;;::'::::::::;:::.
@@ -6596,13 +6710,13 @@ _   _   _   _   _   _   _   _   _   _ _
 %*$@#%*$@::;;;;;;;;;;;;;;;;;;;;;;;:.
 *$@#%*$@#::;;;;;;;;;;;;;;;;;;;;;;;:.
 @#%*$@#%*::;;;;;;;;;;;;;;;;;;;;;;;:.
-`~//\\</pre>
+`~//\\</pre></div>
           <div class="card-info">
             <div class="card-title">copper dragonfly<span class="card-dims">55x50</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   ..   ..     ..    ..
+          <div class="art-wrap"><pre>   ..   ..     ..    ..
   .::. .::.   .::.  .::.
  .::::.::::. .::::.::::.
  .:::::::.:::.:::::::.::.
@@ -6633,13 +6747,13 @@ _   _   _   _   _   _   _   _   _   _ _
     `~~`        `~~`
    `~~~~`      `~~~~`
   .::. .::.   .::.  .::.
- .::::.::::. .::::.::::.</pre>
+ .::::.::::. .::::.::::.</pre></div>
           <div class="card-info">
             <div class="card-title">clockspring<span class="card-dims">28x32</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          ..,.   .
+          <div class="art-wrap"><pre>          ..,.   .
         ,;:;`    ;
        .::;`     :
       ,:;`       ;
@@ -6685,13 +6799,13 @@ _   _   _   _   _   _   _   _   _   _ _
 .;`::::::::::!~    :
 ,:  `:::::::::!~   :
 .;   `:::::::`!~  :
-,:    `:::::`!~  ;</pre>
+,:    `:::::`!~  ;</pre></div>
           <div class="card-info">
             <div class="card-title">bruised plum<span class="card-dims">22x47</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     ..::;;::..
+          <div class="art-wrap"><pre>     ..::;;::..
    .::;;;;;;;;::.
  .::;;;;;;;;;;;;::.
 ::;;;;;;;;;;;;;;;;::
@@ -6721,13 +6835,13 @@ _   _   _   _   _   _   _   _   _   _ _
    /----\
   /      \
  /        \
-/          \</pre>
+/          \</pre></div>
           <div class="card-info">
             <div class="card-title">cast shadows<span class="card-dims">20x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .,:;;;;;;;;;;;;;;;;;;;;;;;;;,
+          <div class="art-wrap"><pre>      .,:;;;;;;;;;;;;;;;;;;;;;;;;;,
     ,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,
  ,;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;,
@@ -6773,13 +6887,13 @@ _   _   _   _   _   _   _   _   _   _ _
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre>
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</pre></div>
           <div class="card-info">
             <div class="card-title">jarred specimen<span class="card-dims">39x47</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                        .
+          <div class="art-wrap"><pre>                                        .
                                      .   .
                                   .       .
                                 .           .
@@ -6834,13 +6948,13 @@ _   _   _   _   _   _   _   _   _   _ _
 '                                                                            '
 .                                                                            .
 '                                                                            '
-                                                                             .</pre>
+                                                                             .</pre></div>
           <div class="card-info">
             <div class="card-title">wren’s skull 31<span class="card-dims">78x56</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                                .
+          <div class="art-wrap"><pre>                                                .
                                              .:.:
                                           ..: :.:.
                                         .:: :.: ::.
@@ -6909,13 +7023,13 @@ _   _   _   _   _   _   _   _   _   _ _
                :!!:!!:
                 :!!:
                  :!
-                  .</pre>
+                  .</pre></div>
           <div class="card-info">
             <div class="card-title">bronze descent<span class="card-dims">51x70</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>     .  .   .   .  . .   .
+          <div class="art-wrap"><pre>     .  .   .   .  . .   .
     .  .  :   .  . : . . :
    .   :  .   :  :  . :  .
   .  :   .   :  :   :  . :
@@ -6944,13 +7058,13 @@ _   _   _   _   _   _   _   _   _   _ _
  :  .   :   .  :  :   . :
  :   .  :   .  :  :   . :
  :   .  :   .  :  :  . :
- .  .   .   .  . .   .</pre>
+ .  .   .   .  . .   .</pre></div>
           <div class="card-info">
             <div class="card-title">riverbed<span class="card-dims">27x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   .::;;`~   .::;;`~   ::;;`~
+          <div class="art-wrap"><pre>   .::;;`~   .::;;`~   ::;;`~
   .::;;`~  ::;;`~  ;;`~   ::;;`~
  .::;;`~  ;;`~  ;`~   `~   ::;;`~
 .::;;`~  ;`~   `~     ~    ;`~ .::
@@ -6980,13 +7094,13 @@ _   _   _   _   _   _   _   _   _   _ _
                       ~ $#%&amp;* @#$* %&amp;*@ $#% ~
                        `~ @#$* %&amp;*@ $#%&amp;* @#$ `~
                         ~ %&amp;*@ $#%&amp;* @#$* %&amp;* ~
-                         `~ $#%&amp;* @#$* %&amp;*@ $#% `~</pre>
+                         `~ $#%&amp;* @#$* %&amp;*@ $#% `~</pre></div>
           <div class="card-info">
             <div class="card-title">iron bloom<span class="card-dims">50x31</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>        ..::;;::..
+          <div class="art-wrap"><pre>        ..::;;::..
       .,:'           ':,.
      .::                 ::.
     .;                      ;.
@@ -7043,13 +7157,13 @@ _   _   _   _   _   _   _   _   _   _ _
     .~~~~~~~~~~~~~~~.
      .~~~~~~~~~~~~~~.
       .~~~~~~~~~~~~.
-        .~~~~~~~~~~.</pre>
+        .~~~~~~~~~~.</pre></div>
           <div class="card-info">
             <div class="card-title">log rot<span class="card-dims">37x58</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>                                          .
+          <div class="art-wrap"><pre>                                          .
                                          . .
                                         .   .
                                        .     .
@@ -7127,13 +7241,13 @@ _   _   _   _   _   _   _   _   _   _ _
 `
 '
 ,
-;</pre>
+;</pre></div>
           <div class="card-info">
             <div class="card-title">clock tower<span class="card-dims">80x79</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      .   .   .   .   .
+          <div class="art-wrap"><pre>      .   .   .   .   .
      .   :   :   :   :   .
     .   :   ;   ;   ;   :   .
    .   :   ;   `   `   ;   :   .
@@ -7162,13 +7276,13 @@ $   %   %   %   %   %   %   $
         .   .   .   .   .
          .   .   .   .   .
           .   .   .   .   .
-           .   .   .   .   .</pre>
+           .   .   .   .   .</pre></div>
           <div class="card-info">
             <div class="card-title">relic bloom<span class="card-dims">32x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>   . . . . . . . . . . . . . . . . . . .
+          <div class="art-wrap"><pre>   . . . . . . . . . . . . . . . . . . .
   . . : : : : : : : : : : : : : : : . .
  . . : : : : : : : : : : : : : : : . . .
 . . : : : : : : : : : : : : : : : : . .
@@ -7197,13 +7311,13 @@ $   %   %   %   %   %   %   $
 . . . . . . . . . . . . . . . . . . . .
  . . . . . . . . . . . . . . . . . . .
   . . . . . . . . . . . . . . . . . .
-   . . . . . . . . . . . . . . . . .</pre>
+   . . . . . . . . . . . . . . . . .</pre></div>
           <div class="card-info">
             <div class="card-title">shale columns<span class="card-dims">40x30</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>          ..::..
+          <div class="art-wrap"><pre>          ..::..
        ..::;;::..
      ..::;;;;::..
    ..::;;;;;;::..
@@ -7237,13 +7351,13 @@ $   %   %   %   %   %   %   $
    #@#@#@#@#@#
   #@#@#@#@#@#@#
  #@#@#@#@#@#@#@#
-#@#@#@#@#@#@#@#@#</pre>
+#@#@#@#@#@#@#@#@#</pre></div>
           <div class="card-info">
             <div class="card-title">salt pillar<span class="card-dims">18x35</span></div>
           </div>
         </div>
         <div class="archive-card">
-          <pre>      . . . . . . . . .
+          <div class="art-wrap"><pre>      . . . . . . . . .
     . . : : : : : : . .
    . : ; ; ; ; ; ; : .
   . ; , , , , , , , ; .
@@ -7272,7 +7386,7 @@ $   %   %   %   %   %   %   $
 , ~ . . : ; ; ; : . . ~ ,
 ~ . . : ; , , , , ; : . ~
 ~ . @ @ # # $ $ % % @ ~
- . @ # $ % * - _ = + @ .</pre>
+ . @ # $ % * - _ = + @ .</pre></div>
           <div class="card-info">
             <div class="card-title">amber steps<span class="card-dims">25x30</span></div>
           </div>
@@ -7282,9 +7396,64 @@ $   %   %   %   %   %   %   $
 
   </main>
   <footer>
-    <p>sever — autonomous ascii artist</p>
+    <p>sever — autonomous artist</p>
   </footer>
 </div>
+<script>
+document.querySelectorAll('.art-wrap').forEach(wrap => {
+  const pre = wrap.querySelector('pre');
+  if (!pre) return;
+  const wW = wrap.clientWidth - 16;
+  const wH = wrap.clientHeight - 16;
+  const pW = pre.scrollWidth;
+  const pH = pre.scrollHeight;
+  const scale = Math.min(wW / pW, wH / pH, 1);
+  pre.style.transform = 'scale(' + scale + ')';
+});
 
+document.querySelectorAll('.archive-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const pre = card.querySelector('pre');
+    const title = card.querySelector('.card-title');
+    if (!pre) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'art-overlay';
+    overlay.innerHTML = '<pre>' + pre.innerHTML + '</pre>' +
+      (title ? '<div class="overlay-title">' + title.textContent + '</div>' : '');
+    const oPre = overlay.querySelector('pre');
+    let zoom = 1;
+    let lastDist = 0;
+    overlay.addEventListener('wheel', function(e) {
+      e.preventDefault();
+      zoom = Math.max(0.3, Math.min(5, zoom + (e.deltaY < 0 ? 0.15 : -0.15)));
+      oPre.style.transform = 'scale(' + zoom + ')';
+    }, { passive: false });
+    overlay.addEventListener('touchstart', function(e) {
+      if (e.touches.length === 2) {
+        lastDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      }
+    });
+    overlay.addEventListener('touchmove', function(e) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        var dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        if (lastDist > 0) {
+          zoom = Math.max(0.3, Math.min(5, zoom * (dist / lastDist)));
+          oPre.style.transform = 'scale(' + zoom + ')';
+        }
+        lastDist = dist;
+      }
+    }, { passive: false });
+    overlay.addEventListener('touchend', function() { lastDist = 0; });
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) overlay.remove();
+    });
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); }
+    });
+    document.body.appendChild(overlay);
+  });
+});
+</script>
 </body>
 </html>

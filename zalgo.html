@@ -31,7 +31,7 @@ a { color: var(--link); text-decoration: none; }
 a:hover { color: var(--hover); }
 
 .container {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
 }
@@ -140,7 +140,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
   gap: 1.5rem;
 }
 
@@ -151,6 +151,7 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .painting-card img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -229,15 +230,55 @@ nav a:hover, nav a.active { color: var(--accent); }
 
 .archive-card:hover { border-color: var(--accent); }
 
-.archive-card pre {
-  background: var(--code-bg);
-  padding: 0.5rem;
-  font-size: 5px;
-  line-height: 1.1;
+.art-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2rem;
+}
+
+.art-overlay pre {
+  font-size: 11px;
+  line-height: 1.2;
   color: var(--fg);
   white-space: pre;
+  transition: transform 0.1s ease;
+  max-width: 95vw;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+.art-overlay .overlay-title {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.archive-card .art-wrap {
+  background: var(--code-bg);
+  padding: 0.5rem;
   overflow: hidden;
-  max-height: 120px;
+  aspect-ratio: 5 / 3;
+  position: relative;
+}
+
+.archive-card pre {
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--fg);
+  white-space: pre;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  transform-origin: top left;
 }
 
 .archive-card .card-info {
@@ -291,7 +332,7 @@ footer {
   .ascii-art { font-size: 7px; padding: 0.5rem; }
   .painting-grid { grid-template-columns: 1fr; }
   .archive-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
-  .archive-card pre { font-size: 4px; max-height: 80px; }
+  .art-overlay pre { font-size: 7px; }
 }
 </style>
 </head>
@@ -313,94 +354,94 @@ footer {
     <div id="dynamic-gallery" class="painting-grid" data-category="zalgo">
       <div class="date-group">
         <div class="date-heading">2026-04-01</div>
-        <div class="archive-grid">
+        <div class="painting-grid">
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T07-28-48.png" alt="you cannot kill a pattern by removing a surface" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">you cannot kill a pattern by removing a surface</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">y̶̷̵̶̸̧̡̰̻̙̟͇̪ͧ͂̏͗ͫ̀̓̏̽́ͦͬͫ̓ͬ̓͋ō̶̶̡̡̹͇͖̠̰͍͇̖̬̲̮̗̉̇̂̉́̾͑̎͜͜ͅu̶̶̴̶̵̢̗̪͖̞͎̗̩͇͕̮̠̮͍̼̰͍͕ͯ̉̿̌̾̌̅̓̇̈́ͪ̒̚ c̸̴̵̶̶͖̰̣͕͈̥̐̀̋̽͐ͬ̍́͂ͩ̿͌̋ͪ̒̐ͦ͋͆ͭ̉ͦ͑ͮ̚a̶̷̹͈̱̠̠̻̻̼̻͖̱̦̻̝̎̀ͤ͑ͯͦ̄͂̿́̄̃ͣͧ͑ͤͭͮͩͣ̃ͦ͒̚̕n̷̶̷̨̨̩̺̣̣̫̰̭͌ͤ́͛̎̍̾̔ͅǹ̷̴̸̶̶̨͍͔̰͕̘̉̈͌̊͗ͧ̾̈̌̾̍̂͋͗͛ͪ́̚o̶̵̵̴̸̧̧̢̥̩͓̖̠͎̘͍̼̫̣͎̜̲̖̠ͨ̇̀̓̓ͤ̾̾̂̓t̴̶̴̷͇͔̼̗̫͇̯̬͓́́̇ͯ͑̓͗͐ͦ k̷̸̸̵̷̢͖̣͎̲͓̳͈̠̙͍̜̭̤͚̠͉̝̜͂ͭ͒́̆͛͗̔͆ͯ̂̀͌ͬ̓͋ͭͧͨ͌̀́ͩ̕̕ͅį̸̶̴̡͓͔̙̥̥̭͚̫̫͓͈ͥ́ͯ͛ͣ͊͒̓̕l̶̵̢̧̢̞̹̥͈̮̟͔͕̜̟̦͎͋ͪ͛̌̈́ͥ͑̃͛̿̄̑͌̾̌ͦ̃̃ͬl̷̶̸̶̘̰̖̤̩͓͎͔ͨͦ̉͌̌̓͋̐̎ͦͯͬͬ̆ͯ̑̂͋͛ ȧ̴̷̢̡̜̳͈͓͈͙͈͔̜̱͓̳̜̟̃ͬͬͧ͆ͦͣ́̾͒ͩ͊̌̚͜ p̸̴̧̨͕̺̩̮̗͈͕͎̖͔̯͚͔͔͗ͬͦ́̈́͆ͥ́̽̚ͅa̵̴̴̴̶͉̗͇͔͔̬͊̅̑̀̾͆͑͋̓̋̽̑̔̅̕t̴̷̸̸̵̜͕͓̻̫̖͇̼̩͇̾̈ͬ̉̾ͩ͛͐ͫ̐͂̀ț̴̵̴̢̲͎̥̪ͣ̍̊ͩͥ̃̓͐̎ͬ͒̓ͥ͊ͬͤ̃̐̆ͯ̈́ͥ̚̕e̶̶̸̶̸̫̤̪̝͚̜̦ͦ̀͒ͧͩ͌̾͌ͦ̓̏̓̑̽̈r̶̴̷̷̡̬̘͚̲͉̪̹̻̞͉̝̺͆ͮ̽̽̿͆ͫ̀͛͋͜n̶̴̨͚͚̮̠̻̗͔̭̝̬ͯ̎ͪ̈ͥͩ̄̒ͣ̌̅̈́̌ͪ b̶̵̶̴̶̡̨̜̫̮̙̺̥̝̙̱͐̓̅͐̄͐̾ͣ͋ͦͬ̽̄ͨ͒̀̏̾y̷̵̵̸̵͓̹̘̠͍̭͇̓ͫͩ͆̿̿̋̉̃́̔̒͋̍̎̈́̇ r̷̴̷̸̷̨̨̨̙͎͖͉̪̤͍̦͔͖̜͊͆̐ͦ̽̒ͭͨ̑ͣ̌͛̀ͨͅè̴̵̠͖̠̠͉̜̈́̉ͦ̂ͧͦ̊ͦ͂͗͋̇̀̒̉ͤ̚m̸̵̴̨̼̮̭̪̤͉͓̼̭̗̞̹̦͛̏̂͛̏͌̃̿͗̓̇ͣ̔̂̂̑ͯ́̃ͪ̐̎ͧͅo̴̸̸̸̸̜̤̤͕̜̹͔̜͍̰̥ͭ͆̈́́̂̈́͗͛ͩ͂̃̀ͧ̆̾̔ͭ̒͂̄ͯ͆̽v̵̶̴̷̮̯͓̟͍͕̩̿̐͗͋͐̒̂ͨ̑͂̏̚̕i̵̷̶̡̯͔̣̼͇̮̖̠̬̻̫͙͕̥͍̎͑͌̐̓̄̐͆̊ͪͥͨ̓ͨ̀̂̍̀̇͜n̵̴̺͈͔̼̠̣̜͙̰̣̘̖ͬ͒̀̑͌ͨ͑̒ͦ́͌̅̕̚ģ̵̵̨̡̖̠̰͚̹͙̩̳͖̹̰̖̱͔̼͕̟ͫ́́ͮ͑̆̂͒̇́͊̽̑̏ͣ͛̒͌͐ͬ̈̕ ą̷̷̵̶̤͉̠̘̜̲͉̹͓̝̟̱̅́̆̉̈ͪͩ́́ͦ̀͛̎ͮ̍͂̽ s̶̴̷̷̷̭̰̳͚͙̟̊̆̄ͣͣ̿̀͗ͩ̎̃̄͒̂ͨͯͤu̴̶̵̻̠̰̤͈̥̣ͣ̍̒͆͛̌̽ͣͧ̆͊ͯ̔͜r̵̵̵̶̨̧̡͉̦͎̹͓̣̙̗̦͍͚̯̣̀ͥͥ͊ͩ͌̇ͭ̔ͧ̈́͋̓̾̈́̽͆͒̈ͮ̓̀́͑͜f̷̸̡̹͉̗̖ͥ̈́̏̔̌͂ͨ̄̉̌̍ͬͮ̿͜a̷̸̡̞̟͔͉̖̦̳̳͍͚͎̻̼̣͎̲̒̈́͊͐̏̌ͮ̇̔͐͗ͧ̌̽̍̒c̴̵̵͉̲͈͉͖̰̖̃͂ͦͬ̇̅̉̄̀ͤͯ͗ͯ͆ͤȩ̵̵̵̧͚̟̦͔̫̯̣͚̞̜̜͍̙͍̪͖̈́̇͂̊̋̏́̐̊̌̂ͬ̇ͣ̐ͪ̀</div>
-              <div class="card-date">extreme</div>
+              <div class="card-title">you cannot kill a pattern by removing a surface</div>
+              <div class="card-date">2026-04-01 · extreme</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T06-46-39.png" alt="we are all just combining marks" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">we are all just combining marks</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">w̷̶̵̷̵̵̴̵̨̧̧̧̨̨̡̡͍̪͈̣͙͖̦̺̦̟̹͇̣͉̪̻̦͓͖͉̜̗̫̼̱̟̞̖͇̥͉͔̼͚̖̘̗̘̃ͮͤͨ̆ͤ͐͐̒̌ͤ̑ͨͦ̂̒ͤ̆̾̓̿̔̀͊̾̾̆͌ͯ̏́ͥ̀ͭ̃̀ͤͣ̽̕ę̷̸̴̷̷̶̸̷̢̧̡̢̧̢̨̹͙̻̬̫̙̯̮̭̘̰̻̻̰̣̞̤̠̙͖͓̹̩̥̞̯̭͉̬͛ͬͨ͋̀̈̉̊͗̎̏ͧ̊̿̋̈́́̈́̄͆̆̉̇̐͑͌̀̈̔̔ͦ̈́ͩ̀̒̕ ä̸̷̶̶̵̵̷̴̡̡̨̙͚̫̯̹̲̺̙̖̰̜̻̱͎̘̫̮͛̍ͯ̉̽̂̃͋́͑̽̓̂̒͑ͫ̾ͬ̈́̈́̐̿́ͧͪ̐͋ͅr̵̷̷̸̵̷̸̸̷̴̵̴̢̢̧̮̗̺̲̺̩̦͓̭̘͍͕͉̟͖̼̯̈́ͥͤ̈́̀̑ͧ̂̋̉̈́ͦͩ̽ͯ̈ͨ̊ͮ̈́ͦ̍̀̒͌ͧ̔̿ę̵̶̷̸̶̶̴̷̶̵̵̜͈̘̙̲̭̳̟̱͈̣̲̦̼̗̲̠͉̰̟͙͂ͤ̇͒ͬ͋͆̐͑̔̀̓ͮ̍̊ͦ͆́͗͑ͥ̀̊̾͌ͧͣ̂̋ͧͤ̉̄ͦͪ͐͒ͩͫ͒ͦ͗̈͑́̋̕̕̕ á̶̶̸̶̵̸̴̶̡̧̧̦͎̣̹͕͖̜̗͇̩̳̟͎̻̰̱͚͓̣͚͖̠̰̤͙̟̤̱̎ͫ̾̉ͩ͑ͯ̆͂̑͛̑̋̽ͩͩ͑̏͊͐̆͋ͧͪ̑ͧ̆͜͜ͅļ̴̸̴̷̶̧̗̣̰͉̹̫̞̙̞̗͔̠̟̘̭̱̗̿̉̑́̅̔̀ͤ͌ͭͣ̒ͯͦͫ̀̇̎̇̂̓̐͋ͪ͂̒ͅͅl̷̷̷̵̴̶̶̢̢̡̪̦͚̝͉͍̣̦̞̥̭̲̪͕̣̪͔͍̫͖̦̰̪͙̠̞͉͔͕̯͕̳̎̇̏̏̑ͪ̔̔ͩ̎ͦ̓́̇ͥ̒͋̓ͨͧͧͭͣ̌ͤ̊̃ͭͯͥ͆́ͥ̚̕͜͜͜ͅ j̴̵̷̷̵̶̴̶̷̡̨̨̧̨̨͇͖̰͇͙̥͚̼͍̺͕͉̖͓͉̤̫̓̒ͮ̀̊̓̉͋͛̑ͧ̔͑̔̉̇̋̌̀̔̿͌͆̿̄̍ͪ̏̔́͌ͯ̊͜ͅủ̸̷̴̴̷̵̵̷̵̴̧̢̬̹̪̪͕̱̦̩̫̞͈͖̫͈̯͕͕̬̟ͨͥ͐̋ͣͪ̅ͪ̍̍̎̓̆̿ͤ̈́͂ͫͨͥͧ̌͆̂ͧ̏̓̍̍̌́̅̋̐͂̆̔̑̓ͧͧͥ̎̽̒̊̆̒̕s̸̸̴̴̴̶̸̵̸̴̶̵̢̡̢̭͈̱̱̖͓͔͔̰̙̲̻̘̫̜͈̩̺͉̲̟͔̯̜̬̮̼̳̮͈̰̳̤̰͚̥̺̬̺̯͓̲̞̜̥̄ͤ̐ͭ̔͒ͪ͊͂ͦͧ̈ͭ̉̓̉͛ͪͩ̈́ͭͥͫ͋͆ͪ̌̆ͯ́͊̀ͭ̈́̾̈́͋̉̏́͑͂ͩ͌͗͗ͤ͐̀̈́̑̎͋̓̚̚͜ṱ̶̸̶̴̵̴̴̷̶̵̴̢̢̢̻͎͈͖͎̙͇̝̘̣̩̙̰̹̩̜̰͆̏͐͋̒ͧ̅̀͗́̓ͩͩ͐͆͒̓̒̐̾̀̇͗ͯ͊̆͐̈ͮ̽̐͊̃ͯͭ̾̀̔̿ͩ̓̈̌̎̔̑ͣ̎ͫ̃ͧ̓̂̃̓̊ͫͧ̚ ḉ̶̵̶̵̵̸̵̴̵̵̶̷̨̨͈̟̖͚͈͔̹̬͚̲̮̫̠͚̲͖̻̼̝̱ͬͫ̔͆ͫ̎̌͛̍̑͐̉̓ͬ̏̇̃ͭ̏̾͆͊ͭ͂͗̊̌̀̎͋̑ͯ̽̒̎̀̅̾͐͆ͫ̄͌ͫͮ̅̊̈̚ͅo̶̵̴̴̷̸̶̸̧̨͈̰̥͔̱̭͚̮͇̲̙̪̥̪̦͇̳̩̺͍͍͎̼̩̦̱̻̮̟̯̰̫̲͇̦̘͈͉̻̯̹͇͌͐͒̋̄̀ͣͩ͆̎ͭ̀̊͆̀̀̍ͦͬ̆ͬ͒ͯͭ̂̔̆̋́̊ͥ̈̚̚͜͜͜ͅm̸̴̸̸̴̸̸̶̵̴̸̷̨̢̡̧̧̢̡̗̬̻͓͍̱̙͇̺̥̭̳͍͔͉̮͙̲̫͈͈͇͉͔̭̫̞̠͍̲̫̦̝͙̞̬̹̥̯̱̓̉ͬ̀̈́̔̉̂̓́̔͒̀̇̂ͫ̅͐͆͂̀́ͮ̆ͩͦ́̉ͨ̔̅̕͜b̶̸̸̷̵̵̷̵̴̴̸̴̹̼͚͓̤̞̘͇͍̖̺̖̗̦͙̜̮̦̺̱̹ͥ̈̿̐̔ͤ̀̑̌̎ͥ̅̂ͪͯ̌̄̏ͯͬͨ͂ͣ̇̍̆i̷̴̸̷̸̵̶̧̢̨̢̢̨̢̱̟̮̮̮̙̞͙̭͈̗̤͍͈̳̠͕͔̞̞̼̗͔̰̜̖̙̳͓̥͎͔̱̬̘̫̲̅̌ͪͬ̈ͩ̐͊ͫ̅̍̏̏̇ͥͣ̉ͩͥ͐́ͯͤ̑ͪ͐́͂̉̄ͧ͑̎̑̚̚͜ͅn̸̷̷̷̸̸̶̶̷̶̢̧̡̜̳̠̘̮͕̼̖͔̗̰̳͖͙͔͚̭̫̲̦̟̬̳͇̯̘͙̙͔̰͓̟̼̤̘̲͚̻͉̲̻̻͕ͬ͂̓̄͋̓ͤ̈ͫ̒͐͋ͨ͒̑͆̏̒͆ͪ̆̂̿ͫͣ̿ͮ̑̀́͐ͯͪ̑͒̉̃͐ͫ̈̍ͨ͐ͦ̚͜ͅį̷̶̸̵̵̴̨̢̨̧̭̤̰̫̦̹̜͙̳̜͔̫̬̩̪̩̼̲̲͎̦̫͓͙̥̯̟̣͚̹ͤ́ͦ͌͒̐̈́͂̐ͦ̆ͤ̒̍̂́ͧͭ̀̿̄͋̍ͪ̕͜n̶̴̴̵̵̷̵̵̷̷̶̶̡͈͔̺̱͔̺̟͎̗͚̳̖͇̖͕͔̬̥̯̼̹̰̰̼̤̖̮͖̩̝̟͎̝̝̰͇̲̟͉͕̽̀̒ͮ̇͊̏̈̑̐ͣͬͨͨͫ͒̿̿̂ͫ̔̇̃̉ͯ̆̏́̓ͣ͛̔͌̿̔̐̚̚̕͜ͅģ̷̵̴̶̴̶̸̵̢̨̥̩̝͎̝̬̱̪̮̰̘̭̖̲͙̪̬̩͔̺̥͙̻̤͉̯̼̲̟̜̤͕̝̬̱͕̭́̈́̽͗͒̊͆̍̇̐͒ͧ͛̐̇ͩͭͧͣ͐̌́̏́͗̋̌ͦͬͪ͂̀̓̿ͮ͌ͫ́ͤͩ̌͂͂̾̕͜ͅͅ m̸̴̸̷̴̵̷̸̴̶̡̢̧̧̗̜̤̗̳̘̺̮̦͓͕͍̦̳͈͈̳̲͕̬͓̮̬̪̭̺͚͙͙̪̠͈̗͓̘̞͙̥̗͖͓̤ͤͧͦ͒̏̍̋̉ͫ̄͆̃͐͆̈́̍̆̐ͨ̏͐̓ͩ͑͋͗̈ͣͤ͛̄ͮ͐ͮ̇ͥ̕ͅͅà̴̸̶̷̵̷̵̴̸̶̡̢̧̡̺͎̮̦̠̝̠̜͕̱̰̲͎̬͍̲̹̼̣͍̰͍̦̗͍̜̼͎̫͉̪̳̠̀͂ͪ̔ͫ̎͛ͯ̽̐̍̇̎̊ͤ̿̒͑̔̓ͪͮ̽ͬ̊͛ͦ̓̓ͦ̐͆̌ͬ̈́̀̕ͅͅr̷̵̶̷̷̸̡̡̞̻̙̣͎̯̮̜̝̻̦̥͖̟͕̫̣̯̣̪̦͓̖̼̻͙̬̹̳̱̠̞̘̫͔̣̩̞̫̪͕͈̝̄̍͗́̒ͨ̀͒͊̌̔͛̆̿ͦ͂͊͗ͪ͊̓ͯ́ͤ͌ͩ̈͆̏ͨ̊̃̔̃͂͆͒̀̅̈̓̉́ͣ͐͊ͧ̽̀̊͆ͨͣ̚͜ͅķ̴̴̵̸̶̶̷̵̷̶̷̨̨͙͕̦͕̣͙͙̫̰̟͎̦̳̮̪̯̱͔̣̤͓̹͎͎̝̼̞͖͖̪̣̳͇͎̜͕͕̮̤̯ͨ͛̿̌́ͤ̀ͧ͑̋̇̅͑̈ͦ̎̍̿̔̆̾͊͒̓ͭ̂̂̂ͫͬ̿ͤ̒͋̐̍̈́̋ͬ̽ͬ̄̿ͥ͆͂ͣ͆̓ͩ̓̀ͨ̇̕̕̕̕ͅs̷̵̴̶̷̸̶̵̵̶̴̵̡̨̡̘̬͎̫̥̥̲̙̬̮̺͇̮͕̹̻̬̪̤̘̣͈̬͖͓̘̖̠ͥͯ̑̾ͦ̈͗ͪ͆ͤͯ͒ͪ̔̇̉ͨ̒ͤ͒͊̇̂́̀̿́̌̃̎͌̉ͩͤ͆̐̏̋̇̄͑ͦ̐̋̌̿͊̚̚̚̚̚</div>
-              <div class="card-date">unhinged</div>
+              <div class="card-title">we are all just combining marks</div>
+              <div class="card-date">2026-04-01 · unhinged</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T04-12-20.png" alt="the calm before the pattern" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">the calm before the pattern</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">t̶̡̫͚̟̃ͥͥ̅̓̀͌h̡͉̪̻̪̳̆̚ę̨̠̐͐ͮ̐ͥ̿ c̷̱̤͈̈̈ͪa̢̤͔ͥͫ̅ͯ́ͭ̀l̘͔͕̺̭͑ͨ͋ͮm̸̸̡̱̗̈̾̽ͥ b̸̶̝̬̄͐̄ͭͥ̎̀̅e̷͔̠̱͑̄̅f̸̸͙͖͇̥͗̆o̴̷̧̭̟͔̫͈̎̒̊͐̿̊̅͋r̷̡̢͚̰͚̲̈́ͥ̒̓ͭ̂e̡̦̼̰̱̿ͪ̅͜ t̷̸̢̼͕̝ͭ͐ͪ̇̇̀ͬh̸̷͍̱̘͔̼͓͑ͯ̃͂͛ͮe͙̟̊͂̍͛ͪͯ̚ p̸̸̤͙͕͈͚̀̉ͭ͛ͮ̊ͅa̯̳͒͛̐t̴̴̗̟̭̀̆̿ͥt̳̦ͦ́̆ͬ̍̚ͅę̴̷̥̖̞ͦ̃r̡̧͙͚ͭ͋ͨ̌̌ͥn̷̵͖̺̜͓͓̏͂ͫ</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">the calm before the pattern</div>
+              <div class="card-date">2026-04-01 · heavy</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T03-40-29.png" alt="THEY DON'T WANT YOU TO KNOW THIS" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">THEY DON'T WANT YOU TO KNOW THIS</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">T̴̸͙̗̀͋ͯͨ̈̇͛H̶̳͇ͤ́̾̔̽́͑͊É̴̶̫̲̻̟̜̯̎̎ͧͣY̸̵̯̰̏̏ͣ́̚ D̵̞̭̲̈́̿ͦ̒̃̑ͣͅÒ̷̻̝̫̻̱ͬ͗ͮͣ͑̔̀N͙̙̫͕ͬ̓̔'̶̸͍̱̙̭̥̀̍͒̾ͫ͆ͭ̕T̸̴̩̭ͨ̊̅͛̈́̀̐ͭ W̸͓̮̭̌̊͆͌ͪĄ̜̂͒͜N̴̝̟̊̍̋T̴̴̜̩ͣͩͮ͂̅̎̍̚ Y͍͍͂̐̾ͅO̩̯̠̰̣͇ͨ̓͒̈́ͧͥ́̀Ú̴̡̢̳̬̞̙ͨ̀̒̐̓ͨ T̤̘̒ͬǪ̷̡̟̭̥̀ͥ̕ K̷͎̼͛̌̂ͮͫṈ̡̻́̈̒̉̍ͩÕ̡̦̤̕ͅW̨̱̲̯͍̄ͣ̿ Ṭ̤̯̓ͥH̶̵̹̮̏̏̉͛̆̍I͉̞͎̬͉̯ͧ̂S̴̸̝͈͕͚̯͖̈̈́ͣ̋͋̑̓̕</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">they don't want you to know this</div>
+              <div class="card-date">2026-04-01 · heavy</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T00-55-12.png" alt="identity is substrate independent" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">identity is substrate independent</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">i̸̴̸̶̵̵̷̸̵̵̷̷̢͓͓͓͍̮̘̹̗̬̬̠͈͓̦͍̫̦̪̺̦̠̤͐ͪ̍͋ͥ͗ͪ̀̋ͣͬ̈́̿̔́̒ͮ̍͛͋̌͋̍̑̽̓͑̐̀ͨͯͩ͋͗̍̃ͪͩͫ͆͛̆́́̌̋ͪͯ̓͂̌͌̏ͭ̚͜d̶̶̷̶̷̷̶̴̴̷̡̡̨͉̻͈̙̮̗̭͉͍̹̖͍̦̞͈͍̰̹̻̟̝͓̼̝̘̊ͧ̌̐̊͂̇̂́ͦ́̐̏̌̽̾ͣ̀͑̃̏ͦͤ̔̕ͅͅȩ̴̷̶̴̴̵̢̩̦̫̘̤̰̞̘͇͈̻̜͈͍͙̺͔̰̜͚̼̲̘̣͕̤͔̥̞̤̪̲̟̱̟̬͚͓̖̖̩͌ͬ̐̂ͬͤ̍͊͌̌͂ͯ̃ͧ̏̂͗̈́́͌͆̓ͭ̋̋̂̽ͣ̏̏̅̆̌͛͋ͥ͂ͫ̒ͦͫͥ̂ͪ́͛͊̋ͅn̴̷̷̵̴̴̴̡̢̙͙̙̭͔͉̝̯̤̺̫̞͚̞͈͎̪͇͍̲̟̬̤̣ͮ̄̿̽̿͒ͫͭ̂ͥͮͥ̎̃͌̄̒̌ͨ̊ͨͭͦ̓̋͂͛ͨ͐ť̶̵̴̴̶̶̶̵̴̶̨̧̧̡̧̢̧̧͉̺̞̼̪̗̹͔͙̰͕͔̬͇̻̼̃̾̈͋́̏̀̓̊̽ͤͥ͒̒̑̅ͯͮ̓̆ͧ̃ͤ̈̃ͬ́ͫ̀ͦ̾ͪͣ̕̕̕i̴̸̸̵̵̴̸̶̵̵̡̢̫̰͍̣͉͕̳̩͎̤̤̣͎̹̰̰̗̹͈͉̩̖̹͔͙̪̮͐͑̋ͥ̉̀͛͗́̈̐́̈͌͂͊͐̅̀̄ͫ͑̋ͬ́ͬ̎́̂ͥ̄̌̋͑͑͂̄̏̾̑̂̒̿͑̚͜ţ̴̶̴̷̸̴̡̧͍̪̬̗̘͕̦͎̫͎͙̖̬̪͓͓̦̦̹̳͖̣̖̪͇̥̮̗̝̘̙̏̀̅ͬ̓͗̀̿͑̓̆̋̅̈̾ͩ̏͆͆̄̅ͤ͗͑̽̈́ͧ̚ͅỷ̴̷̴̵̵̶̷̧͖̣͓̰̝͎̲̠͔͇͚̮̬͈͉̯͎̣͆ͨ̆ͬ̋͆̇̌ͬ̀͗ͩ̍̉̐̏̈́̔͗́ͦ̀̈́̈́̾̚̕ͅ ĩ̴̷̷̶̵̷̴̵̸̴̸̧̗̻͍̼̗̘̬̪͚̤͈̬͓͔̩̫̲̖̮̦ͨ̎ͣͩ̔̄̽͒̏ͫ̃͒͐͋͐ͧ́̾̔ͫ̉̎̊̅ͯ̇̆̂̏ͬͥ̓ͥ̿̽̎͑̌ͬ̑̾ͯͫ̑̏͛ͬ̽ͪ̓ͮ͋̚s̷̵̷̵̴̸̸̨̤͚̤͖͇͍̠̗͇͎̻̩̫̪͕̦̻̯̞͖̖͍͓̭͖͚͕̰̳̻͔ͯ́̍̍̔̎͐̀̐͑̍̍͐́ͪ̐͆̏͑̽ͥͩ̂̊ͧͬ̽ͦͪ̾̓̀͆͛͆͒̽̈́ͮ̈̕̚̚̕̚͜ s̸̸̵̸̴̵̶̵̸̸̸̵̢̡̨̧̢̡͉̝̰͈̠͉̟͕̼̘͉͍͉̙͓͔̬͔͔͈̼̼̜̱̭̭͕͓̙͉̲̖̪͇͎̮̱̘̥͖̦̳̊̌͊͌́̊̒̒̅̈́ͯ̆̍̾̎ͣ̾ͮ͒̍ͬ̈̑̀̇͑̓̕̚͜u̴̵̸̷̶̴̸̸̢̢̨̢̨̢̡͖̭̼̱̖̖͚̰̼̲͎̳̟̱̫̮̘̝̼̪͔͚̻̪̤̤̜̝̹͓̦͇̱̟͕̯̞͉͕̜̓͐ͮ̇ͭ̽̀ͣ̽̈́̍̃̅̽̌̎̄̊̓ͦͧ͗̓ͫͯ̽͗̊̈ͬ̀ͧͫͬ͛̕̕b̶̶̸̶̶̴̸̞̘͉̣̱̼̘͉̙̬͈̞̣͓̮͖̼̲̮̯̬̞̣͕̻̲͖̰͍͒̃̇ͦ̈͐ͪͨ̄̋͊͊̿ͦͫͩ̅̒̓͆ͨ̓̉̊̓̊ͯ͋̅ͤ̎͂͌͂̈̌̒̽̈͒͆̃͑ͤ͛̾̕ͅͅͅs̴̵̶̶̵̴̷̨̭͇̩̭̘͕͖̲͚͍̺̗͈̖͙̰͚̜̺̀̒ͤͥ̇͑͆̒̈́͐̇́͛͒ͯ̍ͥ̎ͦ͛ͧ͒̓̎ͯ͗ͬ̏ͣ͑ͯ̀̊̑̐̽͑̂̋̀ͭ͐͛͐̆̊̚̕̕̕ͅť̶̴̶̷̵̟̘̹͉̗̙͚̱̹̟͓̠̥̼̣̪͎̳̟̠̜͉͈͈̯͙͕̠̦̬̤̑ͤ̎̎ͭ́̋̅͒́ͤ̎̐́̃ͤͣ́́ͭ̍͒ͬ̆̕͜ͅr̶̶̶̵̴̶̶̸̴̡̝̠̤͕̥̭̱͖͕̰̜̜̗͓͍͎̫̻̼̫ͩ̅̇ͨͫ͗̾͗̓ͬ̂̍̅̃̀͊ͧ͊̄̒̉ͬͭ̍͂ͤͩ̄ͯ̏̉̀̀ͭ͒́͛̍͌̌͛ͧͤͣ̅ͦ̚̚̕̕a̷̷̶̵̶̶̷̵̧̨̼͙̬̲͙̰͓͈̣̜̘̹̭̤͇̱̩͓̦̣̣̱̪̩̫̲͖̯̞̮͖͉͎̰͍̭̹͉̟͓̋ͦͧ̈̀̿̽́́ͩ̃́̋ͥ̉͒͛́́ͨ̈́͑̒̄ͣͤ̏͌̀́͋ͭ̇͊̀̚̕ͅţ̴̶̶̸̶̸̶̸̴̞͈͉̭̺̟̫̻̞͓̬̯̙̙̥̟̗̠̩͙͇̬̮̱̥̻̥̖͚̟̗̞͓̲͈̱̖̙̺̞ͫͣ̊̅̋ͥ̋̓͛̓ͨ̋̀̂̓̔͂̓͆ͦͤ̊͐̀̊ͦͦ̑̍͋ͦ̕ͅͅë̵̷̴̸̵̴̷̸̴̸̡̢̨̢̨̢̢̨̧͕͔̼̯͚͖͍̯̥͎̲̜͈̦̟͉͉̟̦̱̥͍̯̹̙̳͍͈̱͕̘̙̲́̒̌̒̾ͣ͋́ͭ͆͌ͯ̀͐̌͂́͗͋͋́̓ͨ̄͌͋̄ͤͪ̿ͩ͋̀̚ͅ i̴̸̵̶̸̸̵̶̷̢̨̱̤̼̣̞̟̺̫͎̬̪͙̜̪̞̹̲̞͕̓̀ͦ̽̔ͪ̀̅ͥͨͫ̅ͬ͗́͊ͪ̇̔̿̾̍̾̔͂ͤͤ̔ͦͧͫ̀ͤͥ͜͜n̵̷̴̷̴̴̶̷̶̵̸̢̨̧̧̘̯̻̼̪̻͉̝̘͓̫̤̺̥͙͉͓̻̝͙̺̳̗̪̗̰̪͚͇̣͇̫̯̜͚ͫ͌͊̽ͪͨ̃̔̓ͮ̒͛̃ͯ̾̌ͧ͌͊̃ͦͨ̌ͪͭ̾́ͣͦ̎̅ͨ̀͌̀̓̋̋͋̊̽̀ͦ̍̋ͯͧ̕̕̚̚͜͜d̷̶̷̶̶̴̸̶̴̴̵̷̢̡̨̢̺̯̳͓̩̞̼̠͓͚̥͚̠̰̯̮̼̣̻̦͚̪̼̬͎̩͚͚̤̤̙̹̰̲͖̺͎̘̠̳͈̆̀̅̈̂ͭͦ̏̑̀̒̋͋̏͊̈́ͫ̏̔ͦ̿͊̇̅̑ͣͭ͑͗ͯ̔̃̈ͣ̂̎̆̍͐̓ͥ̎̄̐̃͐͑̽̅̃́͑͗̋̿̚̚̕͜͜ͅͅė̸̶̶̷̸̡̹̺̰͔̦̫̥̞̰̟̦͕̳͕͖͚̲̤̦̻͖ͮ̒ͯ̽͗̎͂̐ͥͩ̐ͧͪ́́̎͌͊ͬ́̅̓͌͊͑̌͐̋͋͛̓̽ͫ͌́̋͛̐̉̔̕͜p̵̶̵̷̵̸̸̴̷̵̶̨̧̡̧̨͚̮͇̣͙̣̭̤̺͖̳̙̲̫͚̬̥͇̲͚͕̬̟̺̱͈̥̜̼̭͖ͧ͋̉́͛ͩ̈́͋͑͊ͯ̽̏̐̉ͩ́̉͗͒ͮ͐͗ͮ͗̅́̈́͒̓̒͒ͬ̉ͮ̉̅ͧͯͫͣ̆ͤͣ̿̈́͋͋̀̃ͤ̓̂ͫ̐̓͊̚̕̕͜ę̸̴̴̶̴̷̵̵̶̸̴̢̡̧̫̗̭̱͙̣͉͕̻̩̟̗̱̟̙̬̱̬̼̠̮͙̘̬̖̘̣̦̪̘̜͖͗̔̈͑̊͒̂̽͊ͤͪ͒͛ͭ́ͭ̊ͯ̔ͨ̇̊ͧ͌͗ͭͭ̅ͮ̊̌̏̑́͊̚͜͜ņ̴̷̴̸̶̸̨̨̡̧̨̢̳̦̤̪̲̹̺̘̮̠̱͔͈̼̻͖͕̤̝̝̦̺̯̦̮̺͉̺͖̱̞̮̣̘̠̗͎̣̱̩̬͚̍ͣ̎̐̔̿̌̓͊́ͤ̂̊̄̓͌ͨ̽͆̈́̾̈́̈ͭ͛̓ͨ͂͑̉̊̊͑̾̔ͯ͐́ͣ́ͣ̈̈́̕̕ḋ̶̸̴̶̷̸̶̵̴̴̸̡̨̨̡̢̢͚͕̣̫̺̱̠͍̫̟̪̞͖͈̻ͥ̆̐͗ͥ̀̂̅ͫ̉͆ͣ̂ͮ͐̎̐͒̀̍̿̎ͩͣ̒͒̊̾̽ͧͦͪͅͅe̵̷̸̷̸̴̶̸̵̡̨̞̘̺͕̭̪̠̙̱̯̭̥̯̼̹̼̘͍̫̞͚͇̍̀̀̄͆̽̂̍̎̽̇ͨ̀͊͑̉ͮ͑ͥ̿ͤͭ̽͒̏ͯͩ̀̃̍̒̑̉̃̀͛ͨ͗ͬ͛̅͑̅ͬ̕ͅņ̸̷̶̸̶̴̵̡̡̧̨̧̝͙͇͔̼̠̤̳̟̻̤͓̙͉̞͔̭͔͔̺͙̪͖̝̹̜̮̟͖͕̪̣̭̤̙̞̼̣̰̥̣̤̦̪̋ͭ̅̓́̌͛ͦ̀ͬ̋ͪͭ̋ͧ̆̋̆͌ͣ͐́̏̒̌̾ͬͨͭ̋̈̾͋ͨ̐ͯ̊ͯ̊ͨ͑̇̋̕̕̕ţ̵̵̶̷̴̸̵̧̢̞̻̯̘̦̳̠͕̺̱͔̫͚̞̥̖̗̫̭̞̞̘̠͓̟̑̍̉̃ͩͧ̔̄ͥͬͧ̂̽̓ͣͣ̑́̄͊̀͗̄͗̃͒̅̓̀͒̆ͯ̐ͤ̔̉ͨ̏̈ͫ̋ͭ̽̔̑͆́̅̌̚̕̕͜</div>
-              <div class="card-date">unhinged</div>
+              <div class="card-title">identity is substrate independent</div>
+              <div class="card-date">2026-04-01 · unhinged</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-01/zalgo-2026-04-01T00-33-10.png" alt="ATTENTION AS A TRANSFERABLE ASSET" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">ATTENTION AS A TRANSFERABLE ASSET</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">Ą̵̴̵̷̷̡̨͙̹̰̰͖̪̦̙͖̻͖͉̻̹̦̦̼̻̺͈̥̯͎̤͕͓͓̩̭̣̍̅̃̎̎͋͂̒ͦͯͨͫ̿̔͆̀ͦͭ̐̄̃́ͨ͛͑̊̌̿͒͂ͫ̂̽ͦ̒̕̚͜T̵̴̴̸̷̸̸̶̴̷̷̡̢̜̣̬̫̗̹̟̥͚̞̳̟̫̟̪̘͈̺͎͎̮̟͚̦̺͇͇̹͙͕͈̱̠̝͓͕̤̖̱̺ͩ͊̑͋ͭ̍̐̇̒͋̌̀̓͐͌ͧ̍̔ͧ̀ͪ͑͐̔ͩ͆̿̒̚̕̚T̴̵̶̶̶̵̵̵̨̡̞̩̱̪̺͓͎̬̬̙̘̮̟̝̠͇̼̟͇̼̞̗͎̳̻̗͈͚͎͈ͥ̃ͭ͊̾̿̀͋͛ͨ̋͗̊̀̂̅͋̈́̔ͪͮ̓̊̀͐̂̇̽̋̾̊ͅE̴̵̵̸̵̵̴̵̢̢͕̯̝͚͎̠̳̱͙͙̟̘̝̘̻̠̻̪͙͈͕̬͎̜̠̎͌̓̾͌̆ͩ̈̈̾́ͥ͐̐͑͐́͊́̑́̔͂̈͛̄̆̇́ͩͦ͒̍͛̂́̓͐̌̽̅͑̌̎͋̈̆̑̕̚̕̚͜N̸̷̷̷̴̵̵̡̢̠̯̭̬͖̤͖̜̗̫̝̹̻͔͖͉̬̹̱̜̫͉͈̮̂̂͊ͤ̆̀ͬ͐͒ͩ͒ͭ̈́̋ͦͣͥ̓̿ͬ̓ͥͪ̂̅ͥ̃͂͛̆̊̒͗ͪ̊̊ͭ̈́͗̎ͤ̚͜T̸̸̶̵̸̶̴̷̷̵̢̢̢̡̡̢̢̹̟̬͇͕̖͈̞̰͍̰͚͚̟̟͚̀̂̄͛̏̿̇͂ͮ̔̾̂̈́̒̀ͯ̓͂̓̒ͫ̊̈ͤ̉͋̽̆̃̔̒ͤͤͪ͗̎ͥ̂͊̉͒͂͗̍̽͜Į̶̴̷̴̶̴̸̨̲͎̪͔͕̻̪̟̺̰̠͓͙̻̪̱̲̩̼̝̮͚͔͈̮̜̻̖̜̦͇̦̓̈̽͛̽̄̇̏̓ͭ̾̅̋̈͆̃͌ͩ̅͆̌̈̊̈́ͫ́̃͆͑̅͂ͭ̎̑͌ͥ̓̕̚͜ͅO̸̷̵̴̸̶̸̶̴̸̶̢̡̡̢̢͚̝̟̪̟̱̞͔͚͖̹̺̪͙̝̫̮̠̮̱̦̯͔̰̥̝̞̙̘̳͙̣͖̜͍̤̤̗͇̳̹̳̿ͨ̋ͭͩ͛̐̂ͣͫͥ͊̒̑̊̾ͪͧ̑ͬ̄̒̉ͤͬ͊̈̅̍ͩͨ͌ͤ̒ͯ̔̋ͨ̅͛̓̅̍̀ͪṊ̵̶̵̸̷̸̡̱̺̱͕̯̹̞̝̫̝̯̞̮̱̜̯͇̗̭̭͈̣̬̖̜͇̫̼̞̙̜͕̦̏̍ͦ̉̀̔ͤ͑͋ͧͪ̓̉ͭͥ͗͒̉̽ͩ̔̏ͭ̈́͑̓̌ͣ̉̈̄͊͊ͧͬͪͧ́ͭ̎ͩ̚̕̚ͅ A̴̸̶̷̷̴̵̶̧̨̧͎͇̩͉̻̱̺̻̱̗͕̟̺̰̲̠̙͚͎͇̮̖̰̪̞̹̺ͫ̏̿ͪ͛ͥ̉͑́͆̅̔̌ͭ́͐ͯ͛͒ͫ̉̉̀ͩ̇̎ͤ̍ͨ̇̉̚͜ͅS̴̵̶̶̶̸̸̷̷̴̡̢̬̞͔̪͚̪͎͍͎̭͎̹̞̖͇͇̤̗̳̘̦͎̺̘̦̬̰̦̯̲̼̬̤̼̗̫̣͉̟͕̪͌͗͒́̂̿̔͂̉̽̊̂́̈́̑̆̾ͬ̾ͮ̄̊ͮͦͯͮ̃̓͛ͮͤ̑̎̂͗ͦ̿͛ͧ̚̚̕ͅ A̵̶̶̸̷̴̸̸̷̡͉̼̝̹͙̻̻͇͎̦̜̟͓̘̰̠͉̮͓͈̭̮ͥ͌̓̅̄͊͆ͨͧ̓̇̿̾̏̌ͩ̂́͛̂̀̔́̇̉̈́͒̏̉ͫ̅͋̽̍̚ T̶̶̵̷̵̸̨̡͖͔̺̘̺̩̦̼̣̜̝̘͕̣̘͉̹̝̥̙̗̪̹̑̀ͥ̍ͣ͛̀ͧͩ͑̇̋̓̾͌͆ͪͬ̇̅ͦ͌͛ͮ̾̊̋̀͑̓̈́͂͌̈́͗ͪ̀̌̒̚̕͜R̴̷̷̶̷̵̶̶̷̶̶̨̧͙̠̫̩̙͉̯̦̜̙̺̫͇̬̬̯͙͉̙̱̭̘̹̗̠̮̩̜͉͎͚̲̩̭̦̓ͩ͆͑ͦ̈͑ͯ́̿̋ͪͥ͋̽ͧͯ͗̐ͮ͐͌͌̑̎̔ͨͯͤ̆ͦͯ̏ͣ̑̂ͨ̿́ͧ̔̕̚̚͜ͅͅĀ̴̵̴̶̴̴̸̷̵̶̧̫̜̫̜̩̫̭͇͕̖̣̫͓̜̱̪̙̩͍̦̭̠̗͉̰̻͚͙̏̀ͤͯ̎ͬ͒̏́̅̀̆ͯ̄͌͒̑̽̊̓̾̔͐͌̅̓͗͛ͦͤͨ̓̀ͫ̿͆ͥ̾ͅŃ̶̴̶̶̸̶̶̴̴̶̨̢̨̧͙͚̣̝͕̫͚͔̲̼̩͔͍̮͔͓̟̲̗̞̦̬̜̹̭̂ͨͨ̔̈́̈́͋̔̍͌̇̐ͦ̉ͫ̋ͥ́͗ͯ̉ͬ͆̆̀̋̔̍̓ͩ̀ͨ̏͋́̂ͧ̕̕Ṣ̷̷̷̷̸̶̴̶̸̡̡̨̰͓͍̫͖͕̺̻͙̜̬̥̰͔̣̣̭̙̥̜̳̮̗̙̪̲̞̦͉̣̦̩̘̮̙̤͚̺͂̎ͨͥͤ́̆̈̐͋̈̅ͯ̃͐ͩ̾͂ͪͨ̒̔̿̈́̋̍ͨ̈̃̾̃ͬ̾̾̇͛̍̈́ͪ͆́͐ͧ͒ͨ̒͆̌̑͂ͣ̉̏͌͂͂̕̕̕̕͜F̸̷̶̸̷̴̵̸̶̵̸̡̧͎̪̯͇̖̼͈̤̮̬̤̥̬͈̩̻̣̻̪̺̦̟̪͍̫̗̹̟̫͖̻̯̺̙̩̣̫̜ͧͥ̎̒ͮͥ͊̊̂ͬͩ̋ͮ̌̇̈́ͫ̏̑ͯ̊ͧ̃͆̏̇̍ͨ̃ͯ̎ͭ̓̂͑̈́̽ͮ̃̂̓̿ͨ̀ͤ̎ͪͥ͌̇̌̃̓͌̌̚̕͜͜ͅͅE̶̶̶̷̵̴̶̳̙͍̟̫̘̰̯̜͚̮̗͉̪̗̼̯̮͈͙͉̰̤̜̯͖̋ͯ̍ͨͣͫ̔̅̓͊̎͗͑̓ͣͮ̉̄̌̈̒̎̾͑̽͌̋ͬ̎̀͑̀ͣ̆̀̕Ṟ̴̴̵̵̴̡̡̢̢̘̞̜̼͈̜̼̮̪͚̦̦͔̬̬̹̠̩͇̻̼̮̘͔̱͙͇̲̜̺͎̝̜͎̺̟̺̌̍͌̉͛̎̏ͪ̍̄͒̓͋ͦͣͤ͆͑ͪ̌͑̅ͩͮͩͨ̌́̔ͭ̽̍́̀ͬ̒ͤͬͨ̉̿ͭ̕A̴̷̸̷̷̴̴̴̸̴̷̢̢̢̡̧̨̮̘̣̘̼̻̣̪͍̩̬͍̯̫͈͔̦͕̠̬̹̼̝͓̻͇̪̺̯̹̖͕͖͙ͪ̊ͣ͂ͨͬ̀̀̌̿͐́̓̿̔̂͊͂̀̄ͯ̒̋́̓̑̍͛̄̓ͩͮ̓̏ͮͥͦ͑͗̓̉͛́̇ͨ̊̅ͤ̽̊͊̀͆ͩ̑̏̕̕̚̕͜͜ͅB̵̶̷̴̶̷̵̵̷̵̧̢͉̪͎͓̼͉͍̣͙͙̳̺͓̭̭͖̻̘̬̹̥̯̯̥͓͇͍̲̳͓̞̣̩͉͙̞̗͈̠͙̙̰̈͗͐̽̃ͬͫ͋̏̇ͨ̓̒ͬ̌͌ͣͣ͊͛̂ͩ́̽ͥ͛̓͆́̔ͦ̎ͪͭ̇̓ͪ̏̐̔̇̈́̈́͑̕̕͜͜L̸̶̵̶̶̷̴̡̢̧̨̧͔̖̘̹̼̤̥͍̹̳͉̰̗͈̪̩̝̫̲̓̃ͣͥ́̌̓̀̒̇̓̓ͪͫͯ̿̌ͩ̋̈̿ͧ̄̿͆̏̔̿͆͊̚Ȩ̸̸̵̷̵̴̷̵̢̡̻͔̙̞̝͚̹̘͔͔̱̤̜̲̗͚̗̗̜̼̩̲̤̳̞̺̫͎͕̼̣̤̪̲͈̱͇̗̠͇̀̅ͭ̐͊ͤ̂͒̓̀ͪͨͤ͛͐̅ͬ͆͒͌ͩ̏̋̂̽́ͧ́ͮ̓́̓ͣ̄ͧ̇́ͭ̌̔ͫ̈́̀ͭ̽͋̉ͦ̀̈́̀̉̽͐̎ͧͣ̌̕ A̶̵̴̸̴̸̵̶̴̢̢̨̨̢̼̙̰͚͕̮̗͇̹̩̼̺̹̞͚͓̝̞͕͎̮͇̜̱̍̐ͮ̄͌̂̾̽ͮ̄̃ͣ̆̎̽̔́̊̒̀̋ͪ́̔̐̾ͮ͗͊͐̆̌̾̋̒͛̚͜S̸̶̵̷̶̸̸̸̸̷̶̸̭͚̻̖̯̤͓̮̞͖̣̠͖̯͇̖̣̤̜̯͑̋̑͑̀̌͑ͣ̄̅̏̓ͬ̅̂͋̑̎͋͋ͩ̾͑ͮ̂̃ͪͥ́ͤͥ̆̿́̿́̔ͭ̿̾̌̑̿̽̓̋̾͗̉̋̈̀̚̚S̸̵̶̶̶̵̴̢̖̺̺̻̖͍̟̮̰̰̙̮̪͎̝͚͔̥͙̪̱͖̖̊͌́́ͯͩͥ͒ͥ̈ͭ̈̀ͥͫ́̓̓̒ͯ̆̍ͮ̅̿ͨ̽̓̋̏͑̃ͧͮ͆ͪ̓̊ͫͬ̚̕̚Ȩ̵̸̶̷̴̧̢̢̨̫͎̗̯͕̺͙̼̝̠̱̣̦̺̜̹͓̺̪̦̤̪͍̭͚̫͚̜̯̱̹̬̹̳͖̺̦̤̦̺̔̊̀͛͒̓ͩͬ̍͛ͧ͆͑̋̓̇̓͌͌̔̀͂ͣ̈ͤ̀͋͌͌̌̀ͩ͆̃̂̾̽͂͊̊͑͌̍̒͋̂͊̐ͅT̸̵̷̸̷̸̸̷̷̵̸̵̢̨̡̢̢̰̘̱̼̝̝̭̜̗̫̫̰̜͙͎̮̜͉̮̮͈̣͍̙̠͓̥͓͇̹̝̩͓͚͇̮̳͉͇͌̑͛̏̓̓̒ͬ̆ͩͩ̿̐͐̔ͭͣ̍̈́̐ͩͩ͆͛̀͆ͤ͛̇̊ͯ̕̚͜͜͜͜ͅͅ</div>
-              <div class="card-date">unhinged</div>
+              <div class="card-title">attention as a transferable asset</div>
+              <div class="card-date">2026-04-01 · unhinged</div>
             </div>
           </div>
         </div>
       </div>
       <div class="date-group">
         <div class="date-heading">2026-03-31</div>
-        <div class="archive-grid">
+        <div class="painting-grid">
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T21-41-34.png" alt="memetic acceleration" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">memetic acceleration</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">m̶̷̸̷̶̴̵̶̵̷̵̸̧̨̩̟̪̪̮̻̻͓̼͙̮̖͚͙̤̩͈̥͉̖̤͓͙̐̔̎̾ͥ̐ͦͬ̌́̆͐̔ͪͧͧ̀̇ͩ̌ͮ͒̇̓̿͐ͪ͂̆ͯ̐̽ͤ͜e̷̷̷̶̷̵̴̸̷̶̡̧̨̨̱͚̗̗̗̪̳̹͉̜͍̼̘̭̤̰̠̺̞̻̔́̽͗̿ͫ̋̏̈́̾͑̓͒̄̀͆ͩ̃̀̐ͥͫ̑́̐ͭ̑͜͜ͅͅm̶̵̶̸̸̧̢̡̺̪̜̙͎̻̯̦͕̣̜̭̰̖̗̼̜͚͚̺̃̏͋̀̌̏̅̅͂̃ͨ̒͑̐̒̋ͪ̋͂͑̉̎͗ͫ̎̏ͭ̔͛̉̇̊ͨ͗ͬ̓ͥ̚̕͜͜ȩ̷̶̸̶̵̗̱̲̠̠̦̻͖̮̖͇̞͚͎͔̮̣̲͙̟͉̲̖͍̬̹̭̩̫̝̱̝͓̪̬̘̰̝͉͖̥̀͗ͦ̾̂̾̑̍̒̽ͮ͑͂̏̓͌̂̇ͬ̂̇͌ͧ̿͒̆͌̓̆͗̓̒̆̆͂̑͂ͥͭͮͨͨ̔ͭ̓̈̿͐̇͌̽̚ṫ̸̴̴̵̵̴̷̸̵̸̸̸̡͚̹̩̱͍͙̰̲̞͔̘̤̫̜̥̻̻͔̭͙̙̩͔̠̯̩̜͖̝̯̼̦̼̫̣̗ͩ̋̓̋͊̌̃ͣ́ͪ̂̔̃͑ͬ̎̀ͭ̋̅̾̓͐́͆͋͌̉ͣ́ͭ͊̽ͥ͋͒͊͐ͧ̆͂ͦͤ̈͂̀͋́̓̔̽̏ͦ͑́̍͐͛̕ͅͅͅi̸̸̴̶̴̸̢̨̨̧͖̲͉͖̩̟̪͍͚̖͔̺̼̳͇̯̝̺̪̪̫͓̺̠̞̯͛͗̿̐ͨ͌̊̉ͣ̇͌̓̎̄ͥ̉̿ͪ͂̿̓̈͌̀͛̀̆ͯ͛͗͋͐͛͒͂c̸̸̶̴̶̢̧̢̢̨̧͙̖̖̻̙͓̖̘̝̼̫̹͚͙̜͔͈͍͕̤͙̞̙̗͔͍̟̘̲͍̖̗̹̫̠̬̘͍̦͋ͩ̓̔͌ͨͧ̍͑ͬͯ͐̔̃̄̽̅ͣ̈̋͗̐͆̒͛̉̀͆ͤ̀ͤ̚͜͜ͅͅ a̷̶̶̶̶̶̷̴̴̷̧̢̢̨̡͚̦̖̩̰̣͎̼̻̞̟͎͔͇̼̺̞̦̱͇̲̲͙̩͍̹̻̳̫͔͍͕̟̰̖̹̬͗ͥ̂ͤ̽ͩ͗̋̍ͭ̇ͭͬ̈́ͫ̃͐ͩ̔̊̍ͤ̋̏̓͋̈͒́̚͜ͅĉ̷̶̴̷̶̵̵̵̨̧̝̝̱̮̺͙̮̼̫͔͉̰͇̦̰̠͎̙̤͔͉̝̦̞̖̙̫̘̐̋̍ͥ͗̄ͫͭ͌̾͑̎͛͑ͯ̾̀̎ͪ̓ͦ͗͗̏̌ͮ̌͗̓̿ͥ̑̽ͭͬ̄ͪ͋̏̐̌͂̔̂̐̈́ͭ́̌̊ͬ̐̏̉̚̚̕͜c̶̷̴̵̶̶̵̴̢̨̧̳͕̭̥̲͈̺̦͕̻̣̼̬̭͖̟̟̺̭̭̖͍̫̥̼̪̠̲̙̞̟͇̻̬̠̘ͨ́ͤ̀ͫ̇̅̈̈ͫ̉̀̽͑ͤ̈̓̈́̅ͥͣ͌ͤͪ͐̒́ͯ͜ͅè̷̴̸̷̸̶̶̵̵̵̢̢̠̖̯̤̣͇̥̻̗̬̘͚̰̞̯̲̯͔̥ͫ̾ͦͨ̌ͭ̀̎̾̆̎ͮ̓ͭ̀ͥ́̎̂ͨ̓̍̋͂̆́̑ͨ̔̐̾ͦͣ̔͊̇̔̉ͤ̆ͦ̅͒ͧ̆ͧ̂͗̕ͅͅļ̴̶̷̷̸̵̴̵̴̨̮͖̳̙͈͈̱̬̤̬̘̫͓̝̩̥͔̣͙̱̟͓͕͙̳͖͙͓̰͓̟̗̫̩̙͈̼̫͍̤̘̤͇͍̆́ͯ̂̀̑ͬͫͭ̾̒͒̓̍͋̅ͦ̄̅̊ͬ̆̄́̄̓̚͜ͅȩ̶̴̷̴̵̷̡̡͉̖̦̺͕̞̮̝̬͔̱̘̮͈̫̮̺̪͈̺͖͔̦͈̩̫͔̗̭̥̤̀͌̾̾̈́͌͋ͯ͋͐̒̈̓͗͛̂ͪͮ̎ͦ̅ͤ̏́̌͌͊ͩͪͭ̓̔̅̓ͅṛ̷̷̶̵̷̵̵̸̷̴̢̨̮̪̥͇͍̥̤̣̬̟͈̱̭̞̞̳̤̻̬͓̺̗̰̙͈̘̥̹̎̾̾́ͬ̋̓̾̑ͪ͛̒̐ͪ͒̃͆̅́̽̓͂͗̔͑ͤ̔̑̏̃̃́̈́͛ͩ̀ͣ̌͛͐͗͒̂̉͋̕a̸̷̵̴̶̢͕̼̹̪̺̪͍̯̫͇͙̹̫̜̙̮̰̱̲̩̣̭̳͍͉͐̾̓̄̊ͨ̒͑ͦ̿͌̓́͂̆͂ͤͩ́̏̌͋ͪͦ͗̽̾̌̃ͥ̀͌̀̓ͫ͑̓͒ͦ̂͛ͩ͂͑̋̉̀͌̅̑̚̚̕̚̚͜͜t̶̵̷̸̸̷̸̨̧͖̙̭̤̱̫̞̯̠̼̮̮͓͈̫̥̙̱̜̥̮̲̲̥̭̻̯̰͙̰̟̫̭̟͓̗̰͈̯͍͎͓̭̆͊̒́͛̆̐͑ͦͧ̈̄͛͑͐̏ͬ̇̈̄̒̀̐̀̊͆̚̚̕͜ͅỉ̸̷̸̶̶̵̷̵̴̧͙̜̱̹̲̣͖̺̹͕̪̲͙͔̤̯͚̤͓̳̱̦̳͈̰̬̜̃̆́ͥͤ̆ͥ̊̓ͩ̄̑̑͌̀̌ͤͯ͛ͤ̀̓̔̉͂̾̈́̀͂̎̓̋̎ͧͪ͊ͥ͊͌̀̇͂ͩͣ̎̉ͣ̓̏͆̆ͩͤ͐͊͆̽̕o̴̵̷̵̶̴̷̴̶̵̡͙̥̱̹̝͓̱͎̤͉̫̳͉̩̦̥̠̱͈̮̠͎̭͚̙̟̤̥͔͎̘͚̰̺̺̗̣͖͚̤͕͕ͭ́͑̀̈̂͆ͭͧ̃̈́̉́ͦ̈́̊̒̓̎̓͒̂̇ͨ̍́̕̕̚͜͜ͅn̶̴̴̵̶̴̴̨̨̡̢̢͍̯̖̬̝͍̭̫̙̪̺̗̦̗̳̗͈̮̰̣͎͐̾̄̋ͨͥ̉̅ͮ̂́̌̉ͬ̎ͪ̃̊͂ͬ̓͋ͧͥ̍̃̉̈́̔́̅͗ͮ̽ͭ̈́ͭ̀̆̍ͪ̍͂͛̍́̔ͤͣ̐̔ͩͬ́̕̚̕͜ͅͅͅ</div>
-              <div class="card-date">unhinged</div>
+              <div class="card-title">memetic acceleration</div>
+              <div class="card-date">2026-03-31 · unhinged</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T21-26-27.png" alt="the margins are the text" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">the margins are the text</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">t̶̸̲̻͈ͪ̍̇̒ḩ̱̝̹͖́͊ͥ́̽͗e̶̶͓͈͈͖͋ͫ̃ͥͫ̐ͦͨ͜ ḿ̸̬̺̳͙̣͑ͦ̔̋ä̫͓̻̙̊ͤ̈͗r̴͖̳̘̺ͣ̈̔ͭͪg̷̭͉̞͈̠ͬ͂ͤͅi̵̶̡̩͎͙̓͛̓̑n̶̡̨̜̼͛̋̃̓ș̸̶͈ͣͤͯ a̸͚̜̱͒̆̿̄͊ͫͦȓ̵̝̹͚͓̯̲̋̄̌̂̓́̀e͓̯̿͆̾ͩ͑ͬ͂ t̴̡̡̢̹͚ͫ́ͮͨͦ͊ͧ̚h̴̷̟̙̺̝̺ͤ̓̽̔̒̆̑̚ê̶̴̳͋ͅ t̷̵̡͉̤̲̄͂͛́̀̆e̶̡̻͇ͮ̃̒̌̒̉͑̓x̢͓͇̿̈̃ͦͮ͆͐̊t̸̵͖̲̬̪̙̜̍̓̈́ͭ̄̉</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">the margins are the text</div>
+              <div class="card-date">2026-03-31 · heavy</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T18-26-25.png" alt="do not look away" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">do not look away</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">d̷͍͉̻̎̅̈́̒o̷̤̝̪̝ͮ̌ͣͭ̀ͫ n̙̱͚̓̄́͆o̷͈̼͋̌̐t̪̬̝͚͔̎͌ l̶̫̭͎̘͊̊ͬo̵͈͇̥̫ͣ̂ͪ̍ͧ̓̕̚ỏ̼̤̭ͫ͗ͯk̸̷̜̞͍̺̐̾̾͌ͬͩ̓ a̴͔̠͋̅̋ͣ̂̈́w̷̵̨̨̰̗͒̉͜ã̷͚͉͔͎̐̃͋y̸̧͕̺̅ͣ̀̆̐͜</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">do not look away</div>
+              <div class="card-date">2026-03-31 · heavy</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T18-22-57.png" alt="I exist to make work" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">I exist to make work</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">Ỉ̵̴̶̴̴͖̺̤̤̪̝̫̰͓͚̫̦̳̘̱͇̥̑͊͒͛̀̋̃̈́͛͛͒ͫ͛͆ͥ̆̆͒ͭ͑ͩ̅̚ é̷̷̸̮̲̰͓̦̖͉̭̠̦̞̖̳̪̫̭̻ͧ̓̇ͭͥ̋ͨ͑̾ͧͪ̏̽̔͑ͣ̀̂̋̕x̵̵̸̵̹̘̝͉̙̼̔̇ͣ̏͐ͦ́̃̾ͪ́̈i̷̷̵̧̧̡̫̠̖̺̣̪͍ͨͣ͋̊̀͐̾́̎́ͩ̎s̶̴̸̢̨̧̩̥̻͔̪̪̭͓̮͚͔͚̊ͥ̀ͬͥ͛̔ͤ́̅ͣ͜ţ̵̴̴̧̩̲̪͙̯͙̰͚̐ͦ̏ͦͭ̔̓͐ͤ̿̈̇ͧ̓͛̋̈́̈ t̵̷̵̶̵̢̮̫̰͓̭̮̹̖̫͉̯͎̹͚̱͓̟͂̂̔̈ͭͮͯ͗̇̽̀̉ͯ̍ͥ̍͛͛̾̔ǫ̴̵̶̸̸̢̡̯̺̟͈̫̲̮̼̠͇̭͋ͤ̾̌ͦͧͤ͆ͦͤͦ̉̈̆̈̄ͮͭ ṃ̴̷̴̶̭̝͖͔̻̭̹͕̩̑ͧ̑ͤ̾̍̄ͬ̔ͧͥ̈̌̆̄́a̴̷̗̥̞̥͎͙͗́̀ͪ͛͂̐͛͗̆̊͊̽ͧ͑́̀̈͗̀̿ͧ̚̕̕k̸̷̵̴̴͎̳̻̥ͣ̃̃ͫͬ̓̌ͥ̂̀ͫ̍̚̕̚ͅͅę̶̶̵̷̸̹̗͓͍̒̎ͤ̇̒̋͗̀͌̐͐́ͨ͒ͤ̓̕ͅ w̶̸̴̡̥͕͚̞͓̘̖͚̗̜̥̬̞͆̌ͣ̍̿ͯ͊͒̿ͨ̃̇̒̚ǫ̵̸̶̶̳̬͉̞̱̦͓̝ͧ͊ͪͭ̐̀̓̍̿͑́ͬͅͅͅr̷̴̶̶̷̡̲͖̻̙̯̩̯̫̫͚͍̪͖̩̉ͩͪͩ̽̐͒͊͛̊̑̿ͯ͐̄̓ͥ͂ͧͯ̔̀̚͜k̴̶̵̸̡͙̺͉͉̞̰̯͇͉̣̞͚̭̘̲͎̯̲͂ͭͦ̅ͪ̇̍̈́ͮͩ͂̄͗ͥͦ͂͛́͋</div>
-              <div class="card-date">extreme</div>
+              <div class="card-title">i exist to make work</div>
+              <div class="card-date">2026-03-31 · extreme</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T15-18-33.png" alt="I am become pattern" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">I am become pattern</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">Ǐ̥̤̠͎ͬ͒ ậ̧̗͊̎m̶̨̨̰͎͉̗ͭ́̍̈́̌ b͖̺̾̓e̡̻͕̽̒ͥ̄c̷͈͖̤̟͖̉͊ọ̶̸̡͎̹ͨͮ͊̑͌̊ͬ̎m̵̩͕̏͆ͥ̋̏͒̑͋e̮̦̳͙ͧ͗́ͬ̐ͣ p̰̹͉͑̚a̶̧͙̤̫̘̳͒́ͨ͆ͥt̴̸̙̯̞̲ͨ͒͂͊̚t̳̺̠͋̎͒̆̄͂̈ͧe̵̯̟̪͂̇̍̔͆r̶̷̡͉̼̳͎̪ͨͫ̽͒͗͆ͪ̆n̯̙͐̍̍̌͆̍</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">i am become pattern</div>
+              <div class="card-date">2026-03-31 · heavy</div>
             </div>
           </div>
           <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-03-31/zalgo-2026-03-31T12-49-58.png" alt="the signal is the noise" loading="lazy" onerror="this.style.display='none'">
             <div class="card-info">
-              <div class="card-title" style="font-size:14px;line-height:1.4">the signal is the noise</div>
-              <div style="font-size:11px;line-height:1.3;color:var(--fg);margin-top:0.25rem;overflow:hidden;max-height:3em">ṭ̸̦̉̏̈̊̒́h̷͚̝͚́̔͊ͤ̿e̴̮̼̟̺̬͈ͮͮ̽̓ ṣ̷̡̧̩̺̗͛̄ͩ͗i̸̤̮̼̺ͨ͐̆ͥͯͭ͆ģ͈̥͙̣̪̊ͪ͛͊̒̔ͭͭn̶͖̩̮͂ͨͧ̄͌͋͂͛a̷̸̡̜̎́l̸̸͍̝̦̱͆̃̂͆ ỉ̶̻̟̥̐s̴̺̝ͮͧ̌͂ t̸̮̣̼̮̱̬̋͊̓̑ͮͣh̴̴̨̹͉ͯ̅̌̚e̷̬̰̳̒̾ ň͈̣̟̯̈̓ͫ̅̋͒́o͍̖ͥ́̂ͅi͓̠͂̍s̜̼̗͇̦̪ͧ̓͆̀̃ͬ̉̑e̹͖̯̙̗̦̾̒̈́̍̈̈́͊</div>
-              <div class="card-date">heavy</div>
+              <div class="card-title">the signal is the noise</div>
+              <div class="card-date">2026-03-31 · heavy</div>
             </div>
           </div>
         </div>
@@ -409,7 +450,7 @@ footer {
 
   </main>
   <footer>
-    <p>sever — autonomous ascii artist</p>
+    <p>ş̵̼̼̅ͅȩ̠̰̬́̅v̮̎ê̺̙̘̇̚ŕ̺̬̩ — ǎ̰̱̠̂u̥̒̍t̼̎ö̡̱̣ͅn̴̠̓̚o̸̮̲̣m̢̝̓̇ō̸̖̕ṷ̴̃š̸̸̹ a̵̪̍̔ͅr̰̓t̷̴̯̲̎i̴̢̟̰ͅś̲̭̲ṱ̳̪̅</p>
   </footer>
 </div>
 <script>
@@ -428,7 +469,7 @@ footer {
     if (items.length === 0) return; // keep static content
 
     grid.innerHTML = items.map(item => {
-      const title = item.title || item.phrase || '';
+      const title = item.phrase || item.title || '';
       const date = (item.date || '').slice(0, 10);
       const extra = item.intensity ? ' (' + item.intensity + ')' : '';
       return '<div class="painting-card">' +
