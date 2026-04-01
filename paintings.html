@@ -452,13 +452,15 @@ document.querySelectorAll('.painted-img').forEach(img => {
     if (items.length === 0) return; // keep static content
 
     grid.innerHTML = items.map(item => {
-      var title = item.phrase || '';
+      var title = item.phrase || item.title || '';
+      // Strip ugly filenames — if title looks like a filename, use empty
+      if (title.match(/^zalgo-\d/) || title.match(/^\d{4}-\d{2}-\d{2}/)) title = '';
       var date = (item.date || '').slice(0, 10);
       var extra = item.intensity ? ' (' + item.intensity + ')' : '';
       return '<div class="painting-card">' +
         '<img src="' + item.url + '" alt="' + (title || 'zalgo').replace(/"/g, '') + '" loading="lazy" style="width:100%;height:auto;display:block" onerror="this.parentElement.style.display=\'none\'">' +
         '<div class="card-info">' +
-        (title ? '<div class="card-title">' + title.toLowerCase() + extra + '</div>' : '') +
+        (title ? '<div class="card-title">' + title.toLowerCase() + extra + '</div>' : '<div class="card-title">untitled' + extra + '</div>') +
         '<div class="card-date">' + date + '</div>' +
         '</div></div>';
     }).join('');
