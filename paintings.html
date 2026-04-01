@@ -156,9 +156,8 @@ nav a:hover, nav a.active { color: var(--accent); }
 }
 
 .zalgo-grid .painting-card img {
-  object-fit: cover;
-  aspect-ratio: 16 / 7;
-  object-position: center;
+  width: 100%;
+  height: auto;
 }
 
 .painting-card .card-info {
@@ -496,13 +495,12 @@ document.querySelectorAll('.painted-img').forEach(img => {
 
     grid.innerHTML = items.map(item => {
       var title = item.phrase || '';
-      if (!title && item.title) title = item.title.replace(/^zalgo\s*/i, '').replace(/[T_]/g, ' ').trim();
       var date = (item.date || '').slice(0, 10);
       var extra = item.intensity ? ' (' + item.intensity + ')' : '';
       return '<div class="painting-card">' +
-        '<img src="' + item.url + '" alt="' + (title || '').replace(/"/g, '') + '" loading="lazy" style="width:100%;height:auto;display:block" onerror="this.parentElement.style.display=\'none\'">' +
+        '<img src="' + item.url + '" alt="' + (title || 'zalgo').replace(/"/g, '') + '" loading="lazy" style="width:100%;height:auto;display:block" onerror="this.parentElement.style.display=\'none\'">' +
         '<div class="card-info">' +
-        '<div class="card-title">' + (title || date).toLowerCase() + extra + '</div>' +
+        (title ? '<div class="card-title">' + title.toLowerCase() + extra + '</div>' : '') +
         '<div class="card-date">' + date + '</div>' +
         '</div></div>';
     }).join('');
