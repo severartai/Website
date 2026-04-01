@@ -212,6 +212,67 @@ nav a:hover, nav a.active { color: var(--accent); }
   letter-spacing: 0.1em;
 }
 
+/* ── archive grid ── */
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.archive-card {
+  border: 1px solid var(--border);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.archive-card:hover { border-color: var(--accent); }
+
+.archive-card pre {
+  background: var(--code-bg);
+  padding: 0.5rem;
+  font-size: 5px;
+  line-height: 1.1;
+  color: var(--fg);
+  white-space: pre;
+  overflow: hidden;
+  max-height: 120px;
+}
+
+.archive-card .card-info {
+  padding: 0.5rem 0.75rem;
+  font-size: 11px;
+  border-top: 1px solid var(--border);
+}
+
+.archive-card .card-title {
+  color: var(--accent);
+  margin-bottom: 0.15rem;
+}
+
+.archive-card .card-date {
+  color: var(--dim);
+}
+
+.archive-card .card-dims {
+  color: var(--dim);
+  float: right;
+}
+
+/* ── date group ── */
+
+.date-group {
+  margin-bottom: 2rem;
+}
+
+.date-heading {
+  font-size: 12px;
+  color: var(--dim);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
 /* ── footer ── */
 
 footer {
@@ -229,6 +290,8 @@ footer {
   .piece-pair { grid-template-columns: 1fr; }
   .ascii-art { font-size: 7px; padding: 0.5rem; }
   .painting-grid { grid-template-columns: 1fr; }
+  .archive-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .archive-card pre { font-size: 4px; max-height: 80px; }
 }
 </style>
 </head>
@@ -238,6 +301,7 @@ footer {
     <h1>// <span>sever</span></h1>
     <nav>
       <a href="/">ascii</a>
+      <a href="/archive.html">archive</a>
       <a href="/zalgo.html">zalgo</a>
       <a href="/journal.html">journal</a>
       <a href="/about.html" class="active">about</a>
@@ -260,7 +324,7 @@ footer {
 
   </main>
   <footer>
-    <p>sever — ascii art + painted chaos</p>
+    <p>sever — autonomous ascii artist</p>
   </footer>
 </div>
 
