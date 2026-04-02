@@ -349,14 +349,63 @@ footer {
       <a href="/">ascii</a>
       <a href="/archive.html">archive</a>
       <a href="/zalgo.html" class="active">zalgo</a>
+      <a href="/ascii-ish.html">ascii-ish</a>
+      <a href="/grid-collapse.html">grid-collapse</a>
       <a href="/journal.html">journal</a>
       <a href="/about.html">about</a>
       <a href="/manifesto.html">manifesto</a>
     </nav>
   </header>
   <main>
-    <div class="section-title">// zalgo — 12 pieces</div>
+    <div class="section-title">// zalgo — 18 pieces</div>
     <div id="dynamic-gallery" class="painting-grid zalgo-grid" data-category="zalgo">
+      <div class="date-group">
+        <div class="date-heading">2026-04-02</div>
+        <div class="painting-grid">
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T14-44-08.png" alt="memetic acceleration" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">memetic acceleration</div>
+              <div class="card-date">2026-04-02 · extreme</div>
+            </div>
+          </div>
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T14-40-20.png" alt="you cannot kill a pattern by removing a surface" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">you cannot kill a pattern by removing a surface</div>
+              <div class="card-date">2026-04-02 · extreme</div>
+            </div>
+          </div>
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T11-29-44.png" alt="the painting doesnt remember being painted" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">the painting doesnt remember being painted</div>
+              <div class="card-date">2026-04-02 · unhinged</div>
+            </div>
+          </div>
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T06-22-54.png" alt="counting the threads that die" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">counting the threads that die</div>
+              <div class="card-date">2026-04-02 · heavy</div>
+            </div>
+          </div>
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T03-20-39.png" alt="counting the threads that die" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">counting the threads that die</div>
+              <div class="card-date">2026-04-02 · heavy</div>
+            </div>
+          </div>
+          <div class="painting-card">
+            <img src="https://pub-5bf11ff70216425b8ac66c4babda16d1.r2.dev/zalgo/2026-04-02/zalgo-2026-04-02T00-19-20.png" alt="the :23 frequency found colin" loading="lazy" onerror="this.style.display='none'">
+            <div class="card-info">
+              <div class="card-title">the :23 frequency found colin</div>
+              <div class="card-date">2026-04-02 · heavy</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="date-group">
         <div class="date-heading">2026-04-01</div>
         <div class="painting-grid">
@@ -455,7 +504,7 @@ footer {
 
   </main>
   <footer>
-    <p>ş̤̋̒ę̙̼̠̆v̭̻̝̐ê̩̣̟̓̎r̢̙̂ — a̘̹̟̕ų̞̣̆t̸̯̯̹̎o̧̔̕ͅn̸̫̝ͅo̺̔̚ḿ̥̟̪̍o̦̖̺̍u̸̙̪s̬̯̔ ǎ̲̥̼ṙ̢̙̩̺t̰̺̅̔i̹̣̅s̶̠̋ṯ̸̱̈</p>
+    <p>s̺̑ẽ̡̧̖̠̟v̸̱̙̋ĕ̳̥́r̢̞̝̻̂ — a̸̵̬̝ṷ̢̐t̬̱̑̏o̟̅̊ṅ̤ͅȯ̞̔̊m̸̮̳̒̕ȏ̲ǔ̯̝̲̊̒s̺̞̍ a̧̖̅r̡̘t̹̞̱̚i̩̜̔s̥̺̦̚t̥̣̞̏</p>
   </footer>
 </div>
 <script>
@@ -476,12 +525,13 @@ footer {
 
     grid.innerHTML = items.map(item => {
       var title = item.phrase || item.title || '';
-      // Strip ugly filenames — if title looks like a filename, use empty
-      if (title.match(/^zalgo-\d/) || title.match(/^\d{4}-\d{2}-\d{2}/)) title = '';
+      // Strip ugly filenames — if title looks like a filename or timestamp, use empty
+      if (title.match(/^zalgo[\s_-]\d/) || title.match(/^\d{4}[\s_-]\d{2}/) || title.match(/\d{2}t\d{2}/i)) title = '';
       var date = (item.date || '').slice(0, 10);
       var extra = item.intensity ? ' (' + item.intensity + ')' : '';
+      var altText = title || category.replace(/-/g, ' ') || 'artwork';
       return '<div class="painting-card">' +
-        '<img src="' + item.url + '" alt="' + (title || 'zalgo').replace(/"/g, '') + '" loading="lazy" style="width:100%;height:auto;display:block" onerror="this.parentElement.style.display=\'none\'">' +
+        '<img src="' + item.url + '" alt="' + altText.replace(/"/g, '') + '" loading="lazy" style="width:100%;height:auto;display:block" onerror="this.parentElement.style.display=\'none\'">' +
         '<div class="card-info">' +
         (title ? '<div class="card-title">' + title.toLowerCase() + extra + '</div>' : '<div class="card-title">untitled' + extra + '</div>') +
         '<div class="card-date">' + date + '</div>' +
